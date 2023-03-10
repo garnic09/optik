@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="../style/bootstrap-5.1.3-dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../style/font_awesome_5_15_3/css/all.css"/>
+        <link href="../style/styleCarrusel.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="../style/sweetalert2/sweetalert2.css"/>
+        <link rel="stylesheet" href="../style/style.css" />
+        <link href="../style/styleNavbar.css" rel="stylesheet" type="text/css"/>
+        
+    </head>
+
+    <body class="contenido">
+        <header class="header">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid navbar-brand ">
+                    <a href="#" class="logo" onclick="cargarHome()"><img class="m-2 my-1" src='../img/logo.png' style="width:30px">QUALITE</a>
+                    <a class="navbar-link me-2 link" onclick="cargarModuloEmpleado()">Empleados</a>
+                    <a class="navbar-link me-2 link" onclick="cargarModuloCliente()">Clientes</a>
+                    <a class="navbar-link me-2 link" onclick="cargarModuloTratamientos()">Tratamientos</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle link" href="#" role="button" id="dropdownMenuProductos" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuProductos">
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="cargarModuloAccesorios();" >Accesorios</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#" onclick="cargarModuloArmazones();">Armazones</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="cargarModuloSoluciones()">Soluciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="navbar-link me-2 link" onclick="cargarModuloCompra()">Compras</a>
+                    <a class="navbar-link me-2 link" href="../index.html" onclick="logOut()">Salir</a>
+                </div>
+            </nav>
+        </header>
+        <div class="row">
+            <div id="contenedorPrincipal" class="col-12"></div>
+        </div>
+        <script src="../style/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+        <script src="../style/sweetalert2/sweetalert2.all.js"></script>
+        <script src="../style/font_awesome_5_15_3/js/all.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

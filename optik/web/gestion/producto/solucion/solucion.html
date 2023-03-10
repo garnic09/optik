@@ -1,0 +1,102 @@
+<!--!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body-->
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Soluciones</h2>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="hidden" id="txtidSolucion" class="form-control" disabled><br>
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" id="txtidProducto" class="form-control" disabled><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Codigo de Barras:</label><br>
+                        <input type="text" id="txtcodigoBarras" class="form-control" disabled><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Nombre:</label><br>
+                        <input type="text" id="txtnombre" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Marca:</label><br>
+                        <input type="text" id="txtmarca" class="form-control"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Precio Compra:</label><br>
+                        <input type="number" id="txtpCompra" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Precio Venta:</label><br>
+                        <input type="number" id="txtpVenta" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Existencias:</label><br>
+                        <input type="number" id="txtexistencias" class="form-control"><br> 
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <center>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.insertar()">Guardar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.actualizar()">Actualizar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.limpiarForm()">Limpiar</button>
+            </center>
+        </div>
+    </div>
+</div>
+<div class="container mt-5 mb-5">
+    <div class="card border  border-dark">
+        <div class="card-header">
+            <button type="button" class="btn btn-primary" onClick="ma.getAll()">Activos</button>
+            <button type="button" class="btn btn-primary" onClick="ma.getAllInactivos()">Inactivos</button>
+            <form class="d-flex m-1" role="search">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+                <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
+            </form>
+        </div>
+        <!-- <button type="button" onclick="getAll();">Cargar</button>-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">  
+                    <caption>Lista de Soluciones</caption>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>CODIGO DE BARRAS</th>
+                            <th>NOMBRE</th>
+                            <th>MARCA</th>
+                            <th>PRECIO COMPRA</th>
+                            <th>PRECIO VENTA</th>
+                            <th>EXISTENCIAS</th>
+                            <th>VER</th>
+                            <th>ESTATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbSoluciones">                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--/body>
+</html-->

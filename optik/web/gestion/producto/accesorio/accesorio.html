@@ -1,0 +1,92 @@
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Accesorios</h2>
+        </div>
+        
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="hidden" id="txtidAccesorio" class="form-control" disabled><br>
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" id="txtidProducto" class="form-control" disabled><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Codigo de Barras:</label><br>
+                        <input type="text" id="txtcodigoBarras" class="form-control" disabled><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Nombre:</label><br>
+                        <input type="text" id="txtnombre" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Marca:</label><br>
+                        <input type="text" id="txtmarca" class="form-control"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Precio Compra:</label><br>
+                        <input type="number" id="txtpCompra" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Precio Venta:</label><br>
+                        <input type="number" id="txtpVenta" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Existencias:</label><br>
+                        <input type="number" id="txtexistencias" class="form-control"><br> 
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <center>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.insertar()">Guardar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.actualizar()">Actualizar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.limpiarForm()">Limpiar</button>
+            </center>
+        </div>
+    </div>
+</div>
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(1)">Activos</button>
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(0)">Inactivos</button>
+            <form class="d-flex m-1" role="search">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+                <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
+            </form>
+        </div>
+        <!-- <button type="button" onclick="getAll();">Cargar</button>-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">  
+                    <caption>Lista de accesorios</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">CODIGO DE BARRAS</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">MARCA</th>
+                            <th scope="col">PRECIO COMPRA</th>
+                            <th scope="col">PRECIO VENTA</th>
+                            <th scope="col">EXISTENCIAS</th>
+                            <th scope="col">VER</th>
+                            <th scope="col">ESTATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbAccesorio">                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/body>
+</html-->

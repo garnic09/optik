@@ -1,0 +1,210 @@
+<style>
+    body1{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /*background*/
+    }
+
+    .slider{
+        width: 800px;
+        height: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .slides{
+        width: 500%;
+        height: 500px;
+        display: flex;
+    }
+    .slides input{
+        display: none;
+    }
+
+    .slide{
+        width: 20%;
+        transform: 2s;
+    }
+
+    .slide{
+        width: 800px;
+        height: 500px;
+    }
+    /*CSS for manual slide navigation*/
+
+    .navigation-manual{
+        position: absolute;
+        width: 800px;
+        margin-top: -40px;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .manual-btn{
+        border: 2px solid #393E46;
+        padding: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        transform: 1s;
+    }
+
+    .manual-btn:not(:last-child){
+        margin-right: 40px;
+    }
+    .manual-btn:hover{
+        background: #393E46;
+    }
+
+    #radio1:checked ~ .first{
+        margin-left: 0;
+    }
+
+    #radio2:checked ~ .first{
+        margin-left: -20%;
+    }
+
+    #radio3:checked ~ .first{
+        margin-left: -40%;
+    }
+    #radio4:checked ~ .first{
+        margin-left: -20%;
+    }
+
+    #radio5:checked ~ .first{
+        margin-left: -40%;
+    }
+
+    /*css for automatic navigaiton*/
+    .navigation-auto{
+        position: absolute;
+        display: flex;
+        width: 800px;
+        justify-content: center;
+        margin-top: 460px;
+    }
+    .navigation-auto div{
+        border: 2px solid #393E46;
+        padding: 5px;
+        border-radius: 10px;
+        transform: 1s;
+    }
+    .navigation-auto div:not(:last-child){
+        margin-right: 40px;
+    }
+    #radio1:checked ~ .navigation-auto .auto-btn1{
+        background: #393E46;
+    }
+    #radio2:checked ~ .navigation-auto .auto-btn2{
+        background: #393E46;
+    }
+    #radio3:checked ~ .navigation-auto .auto-btn3{
+        background: #393E46;
+    }
+    #radio4:checked ~ .navigation-auto .auto-btn4{
+        background: #393E46;
+    }
+    #radio5:checked ~ .navigation-auto .auto-btn5{
+        background: #393E46;
+    }
+
+</style>
+
+<div class="container mt-5 mb-5 d-flex align-content-center justify-content-center">
+    <!-- INICIO DEL CARRUSEL -->
+    <br>
+    <div class="body1 row mt-2">
+        <div class="slider col-12" >
+            <div class="slides">
+                <!-- RADIO BTN -->
+                <input type="radio" name="radio-btn" id="radio1">
+                <input type="radio" name="radio-btn" id="radio2">
+                <input type="radio" name="radio-btn" id="radio3">
+                <input type="radio" name="radio-btn" id="radio4">
+                <input type="radio" name="radio-btn" id="radio5">
+                <!-- FIN RADIO BTN -->
+
+                <!-- SLIDE IMAGES  -->
+                <div class="slide first">
+                    <img src="../img/lente1.jpg" alt=""/>
+                </div>
+                <div class="slide">
+                    <img src="../img/lente2.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="../img/lente3.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="../img/lente10.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="../img/lente9.jpg" alt="">
+                </div>
+                <!-- FIN SLIDE IMAGES  -->
+
+                <!-- AUTOMATICO NAVEGACION -->
+                <div class="navigation-auto">
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn2"></div>
+                    <div class="auto-btn3"></div>
+                    <div class="auto-btn4"></div>
+                    <div class="auto-btn5"></div>
+                </div>
+                <!-- FIN AUTOMATICO NAVEGACION -->
+            </div>
+
+            <!-- Manual Navigation START -->
+            <div class="navigation-manual">
+                <label for="radio1" class="manual-btn"></label>
+                <label for="radio2" class="manual-btn"></label>
+                <label for="radio3" class="manual-btn"></label>
+                <label for="radio4" class="manual-btn"></label>
+                <label for="radio5" class="manual-btn"></label>
+            </div>
+            <!-- FIN Manual Navigation START -->
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row mt-5 mb-5">
+        <!-- CUADROS INFORMACION -->
+        <div class="col-3">
+            <div class="card p-2"  style="width:15rem; height:20rem;">
+                <img src="../img/img1.jpg" class="card-img-top" alt="a">
+                <div class="card-body">
+                    <p class="card-text">Los examenes oculares los realiza principalmente un optometrista, oftalmologo u optico.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" >
+            <div class="card p-2" style="width:15rem; height:20rem;">
+                <img src="../img/img4.jpg" class="card-img-top" alt="a">
+                <div class="card-body">
+                    <p class="card-text">La graduacion y el diseño de los lentes, se realiza a la medida de tus necesidades.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" >
+            <div class="card p-2" style="width:15rem; height:20rem;">
+                <img src="../img/img3.jpg" class="card-img-top" alt="a">
+                <div class="card-body">
+                    <p class="card-text">Un lente de contacto es una lente fina y curvada que se coloca sobre la película lagrimal que cubre la superficie del ojo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" >
+            <div class="card p-2" style="width:15rem; height:20rem;">
+                <img src="../img/img5.jpg" class="card-img-top" alt="a">
+                <div class="card-body">
+                    <p class="card-text">Nuestros productos estan certificados para darles una gran experiencia a nuestros usuarios.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIN CUADROS INFORMACION -->
+    <!-- FIN DEL CARRUSEL -->
+</div>

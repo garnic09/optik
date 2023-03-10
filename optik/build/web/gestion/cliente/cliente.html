@@ -1,0 +1,165 @@
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Clientes</h2>
+        </div>              
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="hidden" id="txtidCliente" class="form-control" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" id="txtidPersona" class="form-control" disabled>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Nombre:</label><br>
+                        <input type="text" id="txtnombre" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Apellido Paterno:</label><br>
+                        <input type="text" id="txtapePaterno" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Apellido Materno:</label><br>
+                        <input type="text" id="txtapeMaterno" class="form-control"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Género:</label><br>
+                        <select class="form-select" id="slcgenero">
+                            <option value="D">Selecciona una opción</option>
+                            <option value="F">Femenino</option>
+                            <option value="M">Masculino</option>
+                            <option value="O">Otro</option>
+                        </select>   
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Fecha de nacimiento:</label><br>
+                        <input type="date" id="txtfechaNacimiento" class="form-control"><br>  
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Calle:</label><br>
+                        <input type="text" id="txtcalle" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Número:</label><br>
+                        <input type="text" id="txtnumero" class="form-control"><br> 
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Colonia:</label><br>
+                        <input type="text" id="txtcolonia" class="form-control"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">CP:</label><br>
+                        <input type="text" id="txtcp" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Ciudad:</label><br>
+                        <input type="text" id="txtciudad" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Estado</label><br>
+                        <select class="form-select" id="txtestado">
+                            <option value="no">Seleccione uno...</option>
+                            <option value="Aguascalientes">Aguascalientes</option>
+                            <option value="Baja California">Baja California</option>
+                            <option value="Baja California Sur">Baja California Sur</option>
+                            <option value="Campeche">Campeche</option>
+                            <option value="Chiapas">Chiapas</option>
+                            <option value="Chihuahua">Chihuahua</option>
+                            <option value="CDMX">Ciudad de México</option>
+                            <option value="Coahuila">Coahuila</option>
+                            <option value="Colima">Colima</option>
+                            <option value="Durango">Durango</option>
+                            <option value="Estado de México">Estado de México</option>
+                            <option value="Guanajuato">Guanajuato</option>
+                            <option value="Guerrero">Guerrero</option>
+                            <option value="Hidalgo">Hidalgo</option>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="Michoacán">Michoacán</option>
+                            <option value="Morelos">Morelos</option>
+                            <option value="Nayarit">Nayarit</option>
+                            <option value="Nuevo León">Nuevo León</option>
+                            <option value="Oaxaca">Oaxaca</option>
+                            <option value="Puebla">Puebla</option>
+                            <option value="Querétaro">Querétaro</option>
+                            <option value="Quintana Roo">Quintana Roo</option>
+                            <option value="San Luis Potosí">San Luis Potosí</option>
+                            <option value="Sinaloa">Sinaloa</option>
+                            <option value="Sonora">Sonora</option>
+                            <option value="Tabasco">Tabasco</option>
+                            <option value="Tamaulipas">Tamaulipas</option>
+                            <option value="Tlaxcala">Tlaxcala</option>
+                            <option value="Veracruz">Veracruz</option>
+                            <option value="Yucatán">Yucatán</option>
+                            <option value="Zacatecas">Zacatecas</option>
+                        </select>   
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Teléfono Casa:</label><br>
+                        <input type="text" id="txttelCasa" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Teléfono Movil:</label><br>
+                        <input type="text" id="txttelMovil" class="form-control"><br> 
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Email:</label><br>
+                        <input type="text" id="txtemail" class="form-control"><br> 
+                    </div>                            
+                </div>
+                <hr> 
+            </form>
+        </div>
+        <div class="card-footer">
+            <center>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.insertar()">Guardar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.actualizar()">Actualizar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.limpiarForm()">Limpiar</button>
+            </center>
+        </div>
+    </div>
+</div>
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(1)">Activos</button>
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(0)">Inactivos</button>
+            <form class="d-flex m-1" role="search">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+                <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
+            </form>
+        </div>
+        <!-- <button type="button" onclick="getAll();">Cargar</button>-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">  
+                    <caption>Lista de clientes</caption>
+                    <thead class="mb-5 mt-5">
+                        <tr>
+                            <th class="m-3">ID</th>
+                            <th class="m-3">NOMBRE</th>
+                            <th class="m-3">DIRECCIÓN</th>
+                            <th class="m-3">CORREO</th>
+                            <th class="m-3">VER</th>
+                            <th class="m-3">ESTATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbCliente">                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

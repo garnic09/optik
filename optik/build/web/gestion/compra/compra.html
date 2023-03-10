@@ -1,0 +1,111 @@
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Compras</h2>
+        </div>
+
+        <!--div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="hidden" id="txtidAccesorio" class="form-control" disabled><br>
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" id="txtidProducto" class="form-control" disabled><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Clave Única:</label><br>
+                        <input type="text" id="txtclaveUnica" class="form-control" disabled><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Cliente:</label><br>
+                        <input type="text" id="txtcliente" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Empleado:</label><br>
+                        <input type="text" id="txtempleado" class="form-control"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Descuento:</label><br>
+                        <input type="number" id="txtdescuentoa" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <label class="form-label">Detalle venta:</label><br>
+                        <input type="number" id="txtdetalleVenta" class="form-control"><br>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Bucar Productos" id="txtSearch">
+                        <button class="btn btn-outline-primary" type="button" onclick="ma.search()">Search</button> 
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <center>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.insertar()">Guardar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.actualizar()">Actualizar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.limpiarForm()">Limpiar</button>
+            </center>
+        </div-->
+    </div>
+</div>
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <!--button type="button" class="btn btn-primary" onClick="ma.getAll(1)">Activos</button>
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(0)">Inactivos</button-->
+            <form class="d-flex m-1" role="search">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+                <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
+            </form>
+        </div>
+        <!-- <button type="button" onclick="getAll();">Cargar</button>-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">  
+                    <caption>Lista de productos</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">CODIGO DE BARRAS</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">PRECIO VENTA</th>
+                            <th scope="col">AGREGAR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbProducto">                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-5">  
+        <div class="card-header">
+            <h2 class="text-center">Carrito</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">  
+                    <caption>Carrito de productos </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">CODIGO DE BARRAS</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">PRECIO</th>
+                            <th scope="col">CANTIDAD</th>
+                            <th scope="col">DESCUENTO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbProductoA">                      
+                    </tbody>
+                    <p>Total: <b id="total"></b></p>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/body>
+</html-->

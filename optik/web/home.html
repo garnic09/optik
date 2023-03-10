@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Iniciar Sesion</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="style/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
+        <!-- alertas -->
+        <link href="style/sweetalert2/sweetalert2.css" rel="stylesheet" type="text/css"/>
+        <!-- fuente de letras -->
+        <link rel="stylesheet" href="style/font_awesome_5_15_3/css/all.min.css" />
+        <link rel="stylesheet" href="style/styleLogin.css" />
+        <link href="style/styleCarrusel.css" rel="stylesheet" type="text/css"/>
+        <style>
+            .navbar {
+                background: #0f0c29 !important;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29)!important;  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to right, #24243e, #302b63, #0f0c29)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            }
+            .link {
+                color:#FFF !important;
+                font-size: 14px;
+                text-decoration: none;
+            }
+            a:link {
+                text-decoration: none;
+            }
+            a:visited {
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: none;
+                color: #FFF;
+                font-weight: bold;
+            }
+            a:active {
+                text-decoration: none;
+            }
+            .logo{
+                color:#FFF !important;
+                font-size: 20px;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar bg-light">
+            <div class="container-fluid navbar-brand">
+                <a href="home.html" class="logo" ><img class="m-2 my-1" src='img/logo.png' style="width:30px"> QUALITE</a>
+                <a class="navbar-link me-2 link" onclick="" href="index.html">Login</a>
+            </div>
+        </nav>
+        <div class="row">
+            <div id="contenedorPrincipal" class="col-12">
+                <div class="container mt-5 mb-5 d-flex align-content-center justify-content-center">
+                    <!-- INICIO DEL CARRUSEL -->
+                    <br>
+                    <div class="body1 row mt-2">
+                        <div class="slider col-12" >
+                            <div class="slides">
+                                <!-- RADIO BTN -->
+                                <input type="radio" name="radio-btn" id="radio1">
+                                <input type="radio" name="radio-btn" id="radio2">
+                                <input type="radio" name="radio-btn" id="radio3">
+                                <input type="radio" name="radio-btn" id="radio4">
+                                <input type="radio" name="radio-btn" id="radio5">
+                                <!-- FIN RADIO BTN -->
+
+                                <!-- SLIDE IMAGES  -->
+                                <div class="slide first">
+                                    <img src="img/lente1.jpg" alt=""/>
+                                </div>
+                                <div class="slide">
+                                    <img src="img/lente2.jpg" alt="">
+                                </div>
+                                <div class="slide">
+                                    <img src="img/lente3.jpg" alt="">
+                                </div>
+                                <div class="slide">
+                                    <img src="img/lente10.jpg" alt="">
+                                </div>
+                                <div class="slide">
+                                    <img src="img/lente9.jpg" alt="">
+                                </div>
+                                <!-- FIN SLIDE IMAGES  -->
+
+                                <!-- AUTOMATICO NAVEGACION -->
+                                <div class="navigation-auto">
+                                    <div class="auto-btn1"></div>
+                                    <div class="auto-btn2"></div>
+                                    <div class="auto-btn3"></div>
+                                    <div class="auto-btn4"></div>
+                                    <div class="auto-btn5"></div>
+                                </div>
+                                <!-- FIN AUTOMATICO NAVEGACION -->
+                            </div>
+
+                            <!-- Manual Navigation START -->
+                            <div class="navigation-manual">
+                                <label for="radio1" class="manual-btn"></label>
+                                <label for="radio2" class="manual-btn"></label>
+                                <label for="radio3" class="manual-btn"></label>
+                                <label for="radio4" class="manual-btn"></label>
+                                <label for="radio5" class="manual-btn"></label>
+                            </div>
+                            <!-- FIN Manual Navigation START -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container mt-5 mb-5">
+                    <div class="row mt-5 mb-5">
+                        <!-- CUADROS INFORMACION -->
+                        <div class="col-3">
+                            <div class="card p-2"  style="width:15rem; height:20rem;">
+                                <img src="img/img1.jpg" class="card-img-top" alt="a">
+                                <div class="card-body">
+                                    <p class="card-text">Los examenes oculares los realiza principalmente un optometrista, oftalmologo u optico.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3" >
+                            <div class="card p-2" style="width:15rem; height:20rem;">
+                                <img src="img/img4.jpg" class="card-img-top" alt="a">
+                                <div class="card-body">
+                                    <p class="card-text">La graduacion y el diseño de los lentes, se realiza a la medida de tus necesidades.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3" >
+                            <div class="card p-2" style="width:15rem; height:20rem;">
+                                <img src="img/img3.jpg" class="card-img-top" alt="a">
+                                <div class="card-body">
+                                    <p class="card-text">Un lente de contacto es una lente fina y curvada que se coloca sobre la película lagrimal que cubre la superficie del ojo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3" >
+                            <div class="card p-2" style="width:15rem; height:20rem;">
+                                <img src="img/img5.jpg" class="card-img-top" alt="a">
+                                <div class="card-body">
+                                    <p class="card-text">Nuestros productos estan certificados para darles una gran experiencia a nuestros usuarios.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN CUADROS INFORMACION -->
+                    <!-- FIN DEL CARRUSEL -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

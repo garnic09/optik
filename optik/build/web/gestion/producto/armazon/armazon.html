@@ -1,0 +1,122 @@
+<!-- INICIO DE FORMULARIO -->
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Armazones</h2>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="hidden" class="form-control" id="txtidP" disabled> 
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" class="form-control" id="txtidA" disabled> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label class="form-label">Codigo de Barras:</label><br>
+                        <input type="text" class="form-control" id="txtcodigoBarras" disabled><br>
+                        <!--<input type="text" class="form-control" disabled >-->
+                    </div>
+                    <!-- Nombre -->
+                    <div class="col-4">
+                        <label class="form-label">Nombre:</label><br>
+                        <input type="text" class="form-control" id="txtNombre"><br>
+                    </div>
+                    <!-- Marca -->
+                    <div class="col-4">
+                        <label class="form-label">Marca:</label><br>
+                        <input type="text" class="form-control" id="txtMarca"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Precio Compra -->
+                    <div class="col-4">
+                        <label class="form-label">Precio Compra:</label><br>
+                        <input type="number" class="form-control" id="txtPrecioCompra"><br>
+                    </div>
+                    <!-- Precio Venta -->
+                    <div class="col-4">
+                        <label class="form-label">Precio Venta:</label><br>
+                        <input type="number" class="form-control" id="txtPrecioVenta"><br>
+                    </div>
+                    <!--  Existencias -->
+                    <div class="col-4">
+                        <label class="form-label">Existencias:</label><br>
+                        <input type="number" class="form-control" id="txtExistencias"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Modelo -->
+                    <div class="col-4">
+                        <label class="form-label">Modelo:</label><br>
+                        <input type="text" class="form-control" id="txtModelo"><br>
+                    </div>
+                    <!-- Color -->
+                    <div class="col-4">
+                        <label class="form-label">Color:</label><br>
+                        <input type="text" class="form-control" id="txtColor"><br>
+                    </div>
+                    <!-- Dimensiones -->
+                    <div class="col-4">
+                        <label class="form-label">Dimensiones:</label><br>
+                        <input type="text" class="form-control" id="txtDimensiones"><br>
+                        <!-- Descripcion -->
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col">
+                        <label class="form-label">Descripcion:</label><br>
+                        <input type="text" class="form-control" id="txtDescripcion"><br>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <center>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.insertar()">Guardar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.actualizar()">Actualizar</button>
+                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.limpiarForm()">Limpiar</button>
+            </center>
+        </div>
+    </div>
+</div>
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(1)">Activos</button>
+            <button type="button" class="btn btn-primary" onClick="ma.getAllInactivos(0)">Inactivos</button>
+            <form class="d-flex m-1" role="search">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+                <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
+            </form>
+        </div>
+        <!-- <button type="button" onclick="getAll();">Cargar</button>-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">  
+                    <caption>Lista de armazones</caption>
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>MARCA</th>
+                            <th>MODELO</th>
+                            <th>COLOR</th>
+                            <th>PRECIO COMPRA</th>
+                            <th>PRECIO VENTA</th>
+                            <th>EXISTENCIAS</th>
+                            <th>DIMENSIONES</th>
+                            <th>DESCRIPCION</th>
+                            <th>VER</th>
+                            <th>ESTATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbArmazon">                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+
+.header .navbar {
+    background: #0f0c29 !important;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29)!important;  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+.link {
+    color:#FFF !important;
+    font-size: 14px;
+    text-decoration: none;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+    color: #FFF;
+    font-weight: bold;
+}
+a:active {
+    text-decoration: none;
+}
+.logo{
+    color:#FFF !important;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
