@@ -15,7 +15,8 @@ function cargarModuloCliente() {
                     ma = obj;
                     ma.inicializar();
                 });
-            }); 
+            });
+            //Comentario nuevo
 }
 
 function cargarModuloAccesorios() {
