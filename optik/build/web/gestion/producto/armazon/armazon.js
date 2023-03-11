@@ -12,14 +12,17 @@ export function inicializar() {
 }
 
 export function insertar() {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+    console.log(localStorage.getItem("currentUser")); // Imprime en la consola el valor del campo "currentUser" almacenado en localStorage
+    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) { // Verifica si "currentUser" no es una cadena vacía ni nulo
         try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
-            if (!validar()) {
+            let arm = JSON.parse(localStorage.getItem("currentUser")); // Obtiene y convierte en objeto el valor del campo "currentUser" almacenado en localStorage
+            let lToken = arm.usuario.lastToken; // Obtiene el último token de usuario del objeto almacenado en "currentUser"
+
+            if (!validar()) { // Si la validación falla, detiene el proceso
                 return;
             }
+
+            // Obtiene los valores de los campos del formulario
             let nombre = document.getElementById("txtNombre").value;
             let marca = document.getElementById("txtMarca").value;
             let precioCompra = document.getElementById("txtPrecioCompra").value;
@@ -31,14 +34,18 @@ export function insertar() {
             let descripcion = document.getElementById("txtDescripcion").value;
             let fotografia = document.getElementById("txtDescripcion").value;//encodeImageFileAsURL();//necesitas ver como guardar la cadena que devuelve esta funcion encodeImageFileAsURL aqui
 
+            // Crea un objeto "producto" con los valores obtenidos
             let producto = {nombre: nombre, marca: marca, precioCompra: precioCompra, precioVenta: precioVenta, existencias: existencias};
+            // Crea un objeto "a" con los valores obtenidos y el objeto "producto"
             let a = {modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: fotografia, producto: producto};
 
+            // Crea un objeto "armazon" con el objeto "a" en formato de cadena JSON y el último token de usuario obtenido
             let armazon = {datosArmazon: JSON.stringify(a), lastToken: lToken};
-            //alert(JSON.stringify(a));
 
+            // Crea una cadena con los parámetros a enviar en el cuerpo de la petición
             let parametros = new URLSearchParams(armazon);
 
+            // Realiza una petición POST al servidor con la información del armazón a guardar
             fetch("http://localhost:8080/optik/api/restoptik/insertArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
                     .then(response => response.json())
                     .then(data => function (data) {
@@ -48,10 +55,13 @@ export function insertar() {
                                 //alert("Error");
                             }
                         });
+
+            // Muestra un mensaje de éxito y llama a la función getAll() para obtener todos los armazones
             Swal.fire({position: 'center', icon: 'success', title: 'Armazón guardado de forma correcta', showConfirmButton: false, timer: 1500});
             setTimeout(() => {
                 getAll(1);
             }, 2000);
+            // Limpia el formulario
             limpiarForm();
         } catch (e) {
             Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
@@ -64,26 +74,40 @@ export function insertar() {
 }
 
 // necesitas ver como hacer que la funcion no abra una nueva ventana con la cadena de texto
+// Función que toma un objeto que contiene información sobre un archivo de imagen seleccionado por el usuario
 export function encodeImageFileAsURL(element) {
+    // Se obtiene el archivo de imagen seleccionado por el usuario del objeto 'element'
     let file = element.files[0];
+    // Se crea un nuevo objeto 'FileReader'
     let reader = new FileReader();
+    // Se asigna una función al evento 'onloadend' del objeto 'FileReader'
     reader.onloadend = function () {
+        // Se muestra el contenido de la imagen en la página web
         document.write('', reader.result);
+        // Se convierte el resultado de la lectura del archivo de imagen en una cadena base64 y se asigna a la variable 'base64String'
         base64String = reader.result.toString();
+        // Se muestra una alerta que contiene la cadena base64
         alert(reader.result);
     };
+    // Se inicia la lectura del archivo de imagen utilizando el objeto 'FileReader'
     reader.readAsDataURL(file);
 }
 
 export function actualizar() {
     console.log(localStorage.getItem("currentUser"));
     if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+        // Se inicia el bloque try-catch
         try {
+// Se obtiene el token del usuario actual y se asigna a la variable lToken
             let arm = JSON.parse(localStorage.getItem("currentUser"));
             let lToken = arm.usuario.lastToken;
+
+// Si la función validar() retorna falso, se sale del bloque try-catch
             if (!validar()) {
                 return;
             }
+
+// Se obtienen los valores de los elementos HTML y se asignan a variables
             let idProducto = document.getElementById("txtidP").value;
             let idArmazon = document.getElementById("txtidA").value;
             let nombre = document.getElementById("txtNombre").value;
@@ -97,26 +121,59 @@ export function actualizar() {
             let descripcion = document.getElementById("txtDescripcion").value;
             let fotografia = document.getElementById("txtDescripcion").value;
 
+// Se crea un objeto producto con los valores obtenidos y se asigna a la variable producto
+            let producto = {
+                idProducto: idProducto,
+                nombre: nombre,
+                marca: marca,
+                precioCompra: precioCompra,
+                precioVenta: precioVenta,
+                existencias: existencias
+            };
 
-            let producto = {idProducto: idProducto, nombre: nombre, marca: marca, precioCompra: precioCompra, precioVenta: precioVenta, existencias: existencias};
-            let a = {idArmazon: idArmazon, modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: fotografia, producto: producto};
+// Se crea un objeto a con los valores obtenidos y el objeto producto, y se asigna a la variable a
+            let a = {
+                idArmazon: idArmazon,
+                modelo: modelo,
+                color: color,
+                dimensiones: dimensiones,
+                descripcion: descripcion,
+                fotografia: fotografia,
+                producto: producto
+            };
 
-            let armazon = {datosArmazon: JSON.stringify(a), lastToken: lToken};
-            //alert(JSON.stringify(a));
+// Se crea un objeto armazon con los valores obtenidos y el token, y se asigna a la variable armazon
+            let armazon = {
+                datosArmazon: JSON.stringify(a),
+                lastToken: lToken
+            };
 
+// Se crea un objeto URLSearchParams con el objeto armazon y se asigna a la variable parametros
             let parametros = new URLSearchParams(armazon);
 
-            fetch("http://localhost:8080/optik/api/restoptik/actualizarArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
+// Se hace una petición POST a la URL especificada con los parámetros y headers especificados
+            fetch("http://localhost:8080/optik/api/restoptik/actualizarArmazon", {
+                method: "POST",
+                body: parametros,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                }
+            })
                     .then(response => response.json())
                     .then(data => function (data) {
+// Si hay un error en la respuesta, se muestra una alerta de error
                             if (data.error) {
                                 Swal.fire({position: 'center', icon: 'error', title: 'Error al actualizar armazón', showConfirmButton: false, timer: 1500});
                             }
                         });
+
+// Se muestra una alerta de éxito y se llama a la función getAll después de 2 segundos
             Swal.fire({position: 'center', icon: 'success', title: 'Armazón actualizado de forma correcta', showConfirmButton: false, timer: 1500});
             setTimeout(() => {
                 getAll(1);
             }, 2000);
+
+// Se llama a la función limpiarForm()
             limpiarForm();
         } catch (e) {
             Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
@@ -129,29 +186,30 @@ export function actualizar() {
 }
 
 export function getAll(estatus) {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+    console.log(localStorage.getItem("currentUser")); // Se imprime en consola el valor que se encuentra en el objeto currentUser almacenado en localStorage.
+    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) { // Si el objeto no está vacío y no es nulo.
         try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
-            let datos = {estatus: estatus, lastToken: lToken};
-            let parametros = new URLSearchParams(datos);
+            let arm = JSON.parse(localStorage.getItem("currentUser")); // Se almacena en la variable arm el objeto JSON parseado que se encuentra en currentUser.
+            let lToken = arm.usuario.lastToken; // Se almacena en la variable lToken el último token de sesión del usuario que se encuentra en currentUser.
+            let datos = {estatus: estatus, lastToken: lToken}; // Se crea un objeto llamado datos que contiene el estatus y el último token de sesión del usuario.
+            let parametros = new URLSearchParams(datos); // Se crea un objeto de URLSearchParams con los datos a enviar en la petición.
 
+            // Se envía una petición POST al servidor con los datos de la petición y se especifica que se enviará información en formato x-www-form-urlencoded.
             fetch("http://localhost:8080/optik/api/restoptik/getAllArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
-                    .then(response => response.json())
+                    .then(response => response.json()) // Se obtiene la respuesta del servidor y se convierte a JSON.
                     .then(data => {
-                        if (data.error) {
+                        if (data.error) { // Si la respuesta del servidor contiene un error, se muestra una alerta con el mensaje de error.
                             Swal.fire({position: 'center', icon: 'error', title: 'Error al obtener armazones', showConfirmButton: false, timer: 1500});
                         } else {
-                            cargarTablaArmazon(null, data);
+                            cargarTablaArmazon(null, data); // Si la respuesta es exitosa, se carga la tabla con los datos obtenidos.
                         }
-                        JSON.stringify(data);
+                        JSON.stringify(data); // Se convierte la respuesta en JSON y se retorna.
                     });
-        } catch (e) {
+        } catch (e) { // Si ocurre una excepción al intentar realizar la petición, se muestra una alerta de acceso denegado y se redirige al usuario a la página de inicio.
             Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
             window.location.href = "http://localhost:8080/optik/";
         }
-    } else {
+    } else { // Si el objeto currentUser está vacío o es nulo, se muestra una alerta de acceso denegado y se redirige al usuario a la página de inicio.
         Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
         window.location.href = "http://localhost:8080/optik/";
     }
@@ -207,6 +265,7 @@ export function cargarForm(i) {
     document.getElementById("txtDescripcion").value = armazones[i].descripcion;
 }
 
+//Obtiene todos los armazones en la base de datos que tienen como estatus inactivo
 export function getAllInactivos() {
     //alert("ttt");
     let datos = {estatus: 0};
@@ -226,6 +285,7 @@ export function getAllInactivos() {
 
 }
 
+//Manda a llamar al servicio rest que coloca como inactivo a un armazon
 export function estatusInactivo(idArmazon) {
     console.log(localStorage.getItem("currentUser"));
     if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
@@ -258,6 +318,7 @@ export function estatusInactivo(idArmazon) {
     }
 }
 
+//Manda a llamar al servicio rest que coloca como activo a un armazon
 export function estatusActivo(idArmazon) {
     console.log(localStorage.getItem("currentUser"));
     if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
@@ -296,7 +357,7 @@ export function limpiarForm() {
     document.querySelector('form').reset();
 }
 
-
+//Busca y filtra los armazones por nombre y otros campos, posteriormente carga las coincidencias en la tabla
 export function buscar() {
     const busqueda = document.getElementById("txtSearch").value;
     const coincidencias = [];
@@ -337,6 +398,8 @@ const regexValidar = {
     //validar telefono
     telefono: /^[0-9]+$/
 };
+
+//Con ayuda de la funcion regexValidar, valida que todos los campos esten completos y con valores validos
 function validar() {
     let nombre = document.getElementById("txtNombre").value;
     let marca = document.getElementById("txtMarca").value;
