@@ -173,10 +173,12 @@ public class ControllerAccesorio {
             
             accesorios.add(a);
         }
+        // Cerramos conexiones
         rs.close();
         pstmt.close();
         conn.close();
         
+        // Devolvemos la lista de accesorios
         return accesorios;
     }
 }

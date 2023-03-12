@@ -23,9 +23,9 @@ import org.utl.dsm.optik.model.Accesorio;
  */
 @Path("restoptik")
 public class AccesorioREST extends Application{
-    @Path("insertAccesorio")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("insertAccesorio") //Ruta para insertar accesorio
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response insertAccesorio(@FormParam ("datosAccesorio") @DefaultValue ("") String datosAccesorio){
         Gson gson = new Gson();
         Accesorio accesorio = new Accesorio();
@@ -41,9 +41,9 @@ public class AccesorioREST extends Application{
         out = gson.toJson(accesorio);
         return Response.status(Response.Status.CREATED).entity(out).build();
     }
-    @Path("updateAccesorio")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("updateAccesorio") //Ruta para actualizar accesorio
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response updateAccesorio(@FormParam ("datosAccesorio") @DefaultValue ("") String datosAccesorio){
         Gson gson = new Gson();
         Accesorio accesorio = new Accesorio();
@@ -60,9 +60,9 @@ public class AccesorioREST extends Application{
         return Response.status(Response.Status.OK).entity(out).build();
     }
     
-    @Path("deleteAccesorio")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("deleteAccesorio") //Ruta para eliminar accesorio
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response deleteAccesorio(@FormParam ("datosAccesorio") @DefaultValue ("") String datosAccesorio){
         Gson gson = new Gson();
         Accesorio accesorio = new Accesorio();
@@ -79,9 +79,9 @@ public class AccesorioREST extends Application{
         return Response.status(Response.Status.OK).entity(out).build();
     }
     
-    @Path("activateAccesorio")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("activateAccesorio") //Ruta para activar accesorio
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response activateAccesorio(@FormParam ("datosAccesorio") @DefaultValue ("") String datosAccesorio){
         Gson gson = new Gson();
         Accesorio accesorio = new Accesorio();
@@ -98,9 +98,9 @@ public class AccesorioREST extends Application{
         return Response.status(Response.Status.OK).entity(out).build();
     }
     
-    @Path("getAllAccesorio")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getAllAccesorio") //Ruta para obtener todos los accesorios
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response getAllAccesorio(@FormParam("estatus") @DefaultValue("1") String estatus){
         String out = "";
         Gson gson = new Gson();
@@ -108,7 +108,7 @@ public class AccesorioREST extends Application{
             ControllerAccesorio objCA = new ControllerAccesorio();
             List<Accesorio> accesorios;
             accesorios = objCA.getAll(estatus);
-            out = gson.toJson(accesorios); //Convertimos la lista de empleados a un json
+            out = gson.toJson(accesorios); //Convertimos la lista de accesorios a un json
         } catch (Exception ex) {
             out = "{\"error\":" + ex.toString()+"}";
             return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
