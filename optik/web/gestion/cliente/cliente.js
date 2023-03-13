@@ -121,16 +121,20 @@ export function actualizar() {
     limpiarForm();
 }
 
+//Creamos funcion para obtener todos los accesorios ya sean con estatus activo o inactivo
 export function getAll(estatus) {
+    //Armamos el JSON
     let datos = {estatus: estatus};
+    //Pasamos los parametros
     let parametros = new URLSearchParams(datos); // nuestro json lo convierte en un bloque de parametros, se usa para post
-
+    //Consumimos el servicio
     fetch("http://localhost:8080/optik/api/restoptik/getAllCliente", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
                     Swal.fire({position: 'center', icon: 'error', title: 'Error al obtener accesorios', showConfirmButton: false, timer: 1500});
                 } else {
+                    //Cargamos la tabla con los registros obtenidos
                     cargarTablaCliente(null, data);
                 }
                 JSON.stringify(data);
@@ -153,18 +157,20 @@ export function getAllInactivos() {
             });
 }
 
-
+//Creamos funcion para cargar la tabla con los clientes
 export function cargarTablaCliente(coincidencias, data) {
+//Verificamos que haya coincidenncias
     if (coincidencias) {
         data = coincidencias;
     } else
         clientes = data;
     let contenido = "";
+     //Recorremos el arreglo de clientes
     data.forEach((cliente, index) => {
         let nc = cliente.persona.nombre + " " + cliente.persona.apellidoPaterno + " " + cliente.persona.apellidoMaterno;
         let dc = cliente.persona.calle + " " + cliente.persona.numero + " " + cliente.persona.colonia + " " + cliente.persona.cp + " " + cliente.persona.ciudad + " " + cliente.persona.estado;
 
-
+         //Inyectamos codigo agregando los elementos a la tabla
         contenido += "<tr>";
         contenido += "<td>" + cliente.idCliente + "</td>";
         contenido += "<td>" + nc + "</td>";
@@ -181,6 +187,7 @@ export function cargarTablaCliente(coincidencias, data) {
     document.getElementById("tbCliente").innerHTML = contenido;
 }
 
+//Creamos funcion para cargar los datos del cliente seleccionado
 export function cargarForm(i) {
     document.getElementById("txtnombre").value = clientes[i].persona.nombre;
     document.getElementById("txtapePaterno").value = clientes[i].persona.apellidoPaterno;
@@ -205,16 +212,21 @@ export function cargarForm(i) {
     document.getElementById("txttelMovil").value = clientes[i].persona.telmovil;
     document.getElementById("txtemail").value = clientes[i].persona.email;
 }
+
+//Creamos funcion para dejar limpios los campos del formulario
 export function limpiarTablaCliente() {
     document.querySelector('form').reset();
 }
 
+//Creamos funcion para realizar la búsqueda de un cliente por cualquiera de sus campos
 export function Rbusqueda() {
+    //Recuperamos el valor que se desea buscar
     const busqueda = document.getElementById("myInput").value;
+    //Creamos un array donde se agregaran los clientes que coincidan con el valor dado
     const coincidencias = [];
     for (let i = 0; i < clientes.length; i++) {
         const cliente = clientes[i];
-
+        //Se evalua si hay alguna coincidencia entre el valor y los registros del cliente
         if (cliente.persona.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
                 cliente.persona.apellidoPaterno.toLowerCase().includes(busqueda.toLowerCase()) ||
                 cliente.persona.apellidoMaterno.toLowerCase().includes(busqueda.toLowerCase()) ||
@@ -226,12 +238,13 @@ export function Rbusqueda() {
                 cliente.persona.email.toLowerCase().includes(busqueda.toLowerCase()) ||
                 cliente.persona.genero.toLowerCase().includes(busqueda.toLowerCase())
                 ) {
+                //Cargamos la tabla con las coincidencias encontradas
             coincidencias.push(cliente);
         }
     }
     cargarTablaCliente(coincidencias, null);
 }
-//Creamos funcion para eliminar un accesorio de forma lógica (cambiamos su estatus a inactivo)
+//Creamos funcion para eliminar un cliente de forma lógica (cambiamos su estatus a inactivo)
 export function eliminar(idCliente) {
     //Armamos el JSON
     let c = {idCliente: idCliente};
@@ -251,7 +264,7 @@ export function eliminar(idCliente) {
     setTimeout(() => {getAll(1);},2000);
 }
 
-//Creamos funcion para activar un accesorio (cambiamos su estatus a activo)
+//Creamos funcion para activar un cliente (cambiamos su estatus a activo)
 export function activar(idCliente) {
     //Armamos el JSON
     let c = {idCliente: idCliente};
@@ -272,3 +285,22 @@ if (data.error) {
     //Recuperamos los accesorios con estatus inactivo
     setTimeout(() => {getAll(0);},2000);
 }
+
+const regexValidar = {
+//validar letras, espacios y acentos
+    letras: /^[a-zA-ZÁ-ÿ\s]{1,40}$/,
+    //validar numeros y puntos
+    numeros: /^[a-zA-Z0-9-]+$/,
+    //validar numeros enteros
+    numerosEnteros: /^[0-9]+$/,
+    //validar letras, espacios, acentos, numeros, puntos, comas, guiones y máximo 240 caracteres
+    letrasNumerosSimbolos: /^[a-zA-ZÁ-ÿ0-9\s.,-]{1,240}$/,
+    //validar codigo postal
+    cp: /^[0-9]{5}$/,
+    //validar email
+    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    //validar contrasenia
+    contrasenia: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,20}$/,
+    //validar telefono
+    telefono: /^[0-9]{10}$/
+};
