@@ -25,11 +25,12 @@ import org.utl.dsm.optik.controller.ControllerCliente;
 import org.utl.dsm.optik.model.Cliente;
 
 
+
 @Path("restoptik")
 public class ClienteREST extends Application{
-    @Path("insertCliente")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("insertCliente")//Ruta para insertar cliente
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON)//Tipo de respuesta que devuelve
     public Response insertEmpleado(@FormParam ("datosCliente") @DefaultValue ("") String datosCliente){
         Gson gson = new Gson();
         Cliente cliente = new Cliente();
@@ -45,9 +46,9 @@ public class ClienteREST extends Application{
         out = gson.toJson(cliente);
         return Response.status(Response.Status.OK).entity(out).build();
     }
-    @Path("updateCliente")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("updateCliente") //Ruta para actualizar cliente
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response updateEmpleado(@FormParam ("datosCliente") @DefaultValue ("") String datosCliente){
         Gson gson = new Gson();
         Cliente cliente = new Cliente();
@@ -63,9 +64,9 @@ public class ClienteREST extends Application{
         out = gson.toJson(cliente);
         return Response.status(Response.Status.OK).entity(out).build();
     }   
-    @Path("getAllCliente")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getAllCliente")//Ruta para obtener todos los clientes
+    @POST//Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON)//Tipo de respuesta que devuelve
     public Response getAllCliente(@FormParam("estatus") @DefaultValue("1") String estatus){
         String out = "";
         Gson gson = new Gson();
@@ -81,9 +82,9 @@ public class ClienteREST extends Application{
         return Response.status(Response.Status.OK).entity(out).build();
         
     }
-    @Path("eliminarCliente")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("eliminarCliente")//Ruta para eliminar cliente
+    @POST //Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON)//Tipo de respuesta que devuelve
     public Response eliminarCliente(@FormParam ("datosCliente") @DefaultValue ("") String datosCliente){
         Gson gson = new Gson();
         Cliente cliente = new Cliente();
@@ -99,9 +100,9 @@ public class ClienteREST extends Application{
         out = gson.toJson(cliente);
         return Response.status(Response.Status.OK).entity(out).build();
     }   
-    @Path("activarCliente")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("activarCliente") //Ruta para activar cliente
+    @POST//Tipo de peticion
+    @Produces(MediaType.APPLICATION_JSON) //Tipo de respuesta que devuelve
     public Response activarCliente(@FormParam ("datosCliente") @DefaultValue ("") String datosCliente){
         Gson gson = new Gson();
         Cliente cliente = new Cliente();

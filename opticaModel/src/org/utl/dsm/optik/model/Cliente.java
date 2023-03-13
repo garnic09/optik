@@ -9,12 +9,13 @@ package org.utl.dsm.optik.model;
  * @author garni
  */
 public class Cliente {
-    
+    //atributos
     int idCliente;
     String numeroUnico;
     int estatus;
     Persona persona;
 
+    //constructores
     public Cliente() {
     }
 
@@ -24,6 +25,7 @@ public class Cliente {
         this.persona = persona;
     }
 
+    //getters y setters
     public Cliente(int idCliente, String numeroUnico, int estatus, Persona persona) {
         this.idCliente = idCliente;
         this.numeroUnico = numeroUnico;
