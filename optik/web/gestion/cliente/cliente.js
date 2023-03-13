@@ -1,4 +1,4 @@
-//Declaramos el array de los accesorios
+//Declaramos el array de los clientes
 let clientes = [];
 
 /Creamos funcion para inicializar el módulo con la tabla de clientes cargada
