@@ -304,3 +304,30 @@ const regexValidar = {
     //validar telefono
     telefono: /^[0-9]{10}$/
 };
+
+
+ //Hacemos validaciones
+    if (!regexValidar.letras.test(nombre)) {
+        Swal.fire({position: 'center', icon: 'warning', title: 'El campo Nombre solo puede contener letras.', showConfirmButton: false, timer: 1500});
+        return false;
+    }
+    if (!regexValidar.letras.test(apellidoPaterno)) {
+        Swal.fire({position: 'center', icon: 'warning', title: 'El campo Apellido Paterno solo puede contener letras.', showConfirmButton: false, timer: 1500});
+        return false;
+    }
+     if (!regexValidar.letras.test(apellidoMaterno)) {
+        Swal.fire({position: 'center', icon: 'warning', title: 'El campo Apellido Materno solo puede contener letras.', showConfirmButton: false, timer: 1500});
+        return false;
+    }   
+     if (!regexValidar.letras.test(calle)) {
+        Swal.fire({position: 'center', icon: 'warning', title: 'El campo Calle solo puede contener letras.', showConfirmButton: false, timer: 1500});
+        return false;
+    }      
+
+    if (!regexValidar.numeros.test(numero)) {
+        Swal.fire({position: 'center', icon: 'warning', title: 'El campo numero Venta solo puede contener números.', showConfirmButton: false, timer: 1500});
+        return false;
+    }
+
+    return true;
+}
