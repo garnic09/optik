@@ -1,10 +1,15 @@
+//Declaramos el array de los accesorios
 let clientes = [];
 
+/Creamos funcion para inicializar el módulo con la tabla de clientes cargada
 export function inicializar() {
+//Obtenemos todos los accesorios con estatus activo
     getAll(1);
 }
 
+//Creamos funcion para insertar un nuevo cliente
 export function insertar() {
+    //Recuperamos los valores ingresados en el formulario
     let nombre = document.getElementById("txtnombre").value;
     let apePaterno = document.getElementById("txtapePaterno").value;
     let apeMaterno = document.getElementById("txtapeMaterno").value;
@@ -19,14 +24,15 @@ export function insertar() {
     let telCasa = document.getElementById("txttelCasa").value;
     let telMovil = document.getElementById("txttelMovil").value;
     let email = document.getElementById("txtemail").value;
-
+    
+    //Armamos el JSON
     let persona = {nombre: nombre, apellidoPaterno: apePaterno, apellidoMaterno: apeMaterno, genero: genero, fechaNacimiento: fechaNacimiento, calle: calle, numero: numero, colonia: colonia, cp: CP, ciudad: ciudad, estado: estado, telcasa: telCasa, telmovil: telMovil, email: email};
     let cl = {persona: persona};
 
     let cliente = {datosCliente: JSON.stringify(cl)};
-
+    //Pasamos los parametros
     let parametros = new URLSearchParams(cliente);
-
+    //Consumimos el servicio    
     fetch("http://localhost:8080/optik/api/restoptik/insertCliente",
             {
                 method: "POST",
@@ -40,14 +46,17 @@ export function insertar() {
                     //alert("Error");
                 }
             });
+            
     Swal.fire({position: 'center', icon: 'success', title: 'Cliente guardado de forma correcta', showConfirmButton: false, timer: 1500});
-    setTimeout(() => {
+    setTimeout(() => {  //Recuperamos los accesorios con estatus activo
         getAll(1);
     }, 2000);
+    //Limpiamos el formulario
     limpiarForm();
 
 }
 
+//Creamos funcion para limpiar el formulario de clientes
 export function limpiarForm() {
     document.getElementById("txtidCliente").value = "";
     document.getElementById("txtidPersona").value = "";
@@ -68,7 +77,9 @@ export function limpiarForm() {
     document.getElementById("txtemail").value = "";
 }
 
+//Creamos funcion para actualizar un registro de cliente
 export function actualizar() {
+    //Recuperamos los valores ingresados en el formulario
     let idCliente = document.getElementById("txtidCliente").value;
     let idPersona = document.getElementById("txtidPersona").value;
     let nombre = document.getElementById("txtnombre").value;
@@ -85,12 +96,15 @@ export function actualizar() {
     let telCasa = document.getElementById("txttelCasa").value;
     let telMovil = document.getElementById("txttelMovil").value;
     let email = document.getElementById("txtemail").value;
+    
+    //Armamos el JSON
     let persona = {idPersona: idPersona, nombre: nombre, apellidoPaterno: apePaterno, apellidoMaterno: apeMaterno, genero: genero, fechaNacimiento: fechaNacimiento, calle: calle, numero: numero, colonia: colonia, cp: CP, ciudad: ciudad, estado: estado, telcasa: telCasa, telmovil: telMovil, email: email};
     let cl = {idCliente: idCliente, persona: persona};
     let cliente = {datosCliente: JSON.stringify(cl)};
 
-
+    //Pasamos los parametros
     let parametros = new URLSearchParams(cliente);
+    //Consumimos el servicio
     fetch("http://localhost:8080/optik/api/restoptik/updateCliente", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => function (data) {
@@ -99,10 +113,11 @@ export function actualizar() {
                     }
                 });
     Swal.fire({position: 'center', icon: 'success', title: 'Accesorio actualizado de forma correcta', showConfirmButton: false, timer: 1500});
-    setTimeout(() => {
+    setTimeout(() => {//Recuperamos los clientes
         console.log(clientes[idCliente].estatus);
         getAll(clientes[idCliente].estatus);
     }, 2000);
+    //Limpiamos el formulario
     limpiarForm();
 }
 
@@ -216,11 +231,13 @@ export function Rbusqueda() {
     }
     cargarTablaCliente(coincidencias, null);
 }
-
+//Creamos funcion para eliminar un accesorio de forma lógica (cambiamos su estatus a inactivo)
 export function eliminar(idCliente) {
+    //Armamos el JSON
     let c = {idCliente: idCliente};
 
     let cliente = {datosCliente: JSON.stringify(c)};
+    //Pasamos los parametros
     let parametros = new URLSearchParams(cliente);
     fetch("http://localhost:8080/optik/api/restoptik/eliminarCliente", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
@@ -230,14 +247,20 @@ export function eliminar(idCliente) {
         }
     });
     Swal.fire({position:'center',icon:'success', title:'Cliente eliminado de forma correcta',showConfirmButton:false,timer:1500});
+    /Recuperamos los clientes con estatus activo
     setTimeout(() => {getAll(1);},2000);
 }
 
+//Creamos funcion para activar un accesorio (cambiamos su estatus a activo)
 export function activar(idCliente) {
+    //Armamos el JSON
     let c = {idCliente: idCliente};
 
     let cliente = {datosCliente: JSON.stringify(c)};
+    
+    //Pasamos los parametros
     let parametros = new URLSearchParams(cliente);
+    //Consumimos el servicio
     fetch("http://localhost:8080/optik/api/restoptik/activarCliente", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => function (data) {
@@ -246,5 +269,6 @@ if (data.error) {
         }
     });
     Swal.fire({position:'center',icon:'success', title:'Cliente activado de forma correcta',showConfirmButton:false,timer:1500});
+    //Recuperamos los accesorios con estatus inactivo
     setTimeout(() => {getAll(0);},2000);
 }
