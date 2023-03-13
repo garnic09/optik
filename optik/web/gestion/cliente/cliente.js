@@ -121,7 +121,7 @@ export function actualizar() {
     limpiarForm();
 }
 
-//Creamos funcion para obtener todos los accesorios ya sean con estatus activo o inactivo
+//Creamos funcion para obtener todos los clientes ya sean con estatus activo o inactivo
 export function getAll(estatus) {
     //Armamos el JSON
     let datos = {estatus: estatus};
