@@ -89,10 +89,10 @@ public class ControllerAccesorio {
         
         cstmt.setInt(6, accesorio.getProducto().getIdProducto());
         
-        //Paso 6: Ejecutar la llamada al procedure
+        //Paso 5: Ejecutar la llamada al procedure
         cstmt.executeUpdate();
         
-        // Paso 9 cerrar objetos de conexion 
+        // Paso 6 cerrar objetos de conexion 
         cstmt.close();
         conn.close();
         conexion.close();
