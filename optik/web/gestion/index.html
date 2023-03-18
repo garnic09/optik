@@ -21,19 +21,36 @@
                     <a class="navbar-link me-2 link" onclick="cargarModuloEmpleado()">Empleados</a>
                     <a class="navbar-link me-2 link" onclick="cargarModuloCliente()">Clientes</a>
                     <a class="navbar-link me-2 link" onclick="cargarModuloTratamientos()">Tratamientos</a>
+                    <a class="navbar-link me-2 link" onclick="cargarModuloMaterial()">Materiales</a>
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle link" href="#" role="button" id="dropdownMenuProductos" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuProductos">
                             <li>
                                 <a class="dropdown-item" href="#" onclick="cargarModuloAccesorios();" >Accesorios</a>
                             </li>
-                            <li><a class="dropdown-item" href="#" onclick="cargarModuloArmazones();">Armazones</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="cargarModuloArmazones();">Armazones</a>
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="#" onclick="cargarModuloSoluciones()">Soluciones</a>
                             </li>
                         </ul>
                     </div>
-                    <a class="navbar-link me-2 link" onclick="cargarModuloCompra()">Compras</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle link" href="#" role="button" id="dropdownMenuVentas" data-bs-toggle="dropdown" aria-expanded="false">Ventas</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuProductos">
+                            <li>
+                                <a class="navbar-link me-2 link" onclick="cargarModuloVenta()">Venta Productos</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="cargarModuloVentaLente();">Venta Lentes</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="cargarModuloVentaLenteC()">Venta Lente de Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                     <a class="navbar-link me-2 link" href="../index.html" onclick="logOut()">Salir</a>
                 </div>
             </nav>
