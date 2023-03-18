@@ -16,8 +16,8 @@ public class ConexionMySQL {
     
     public Connection open(){
         String usuario = "root";
-        String password = "root";
-        String url = "jdbc:mysql://127.0.0.1:3306/optiqalumnos?useSSL=false&useUnicode=true&characterEncoding=utf-8";
+        String password = "12345";
+        String url = "jdbc:mysql://127.0.0.1:3306/optiqalumnos2?useSSL=false&useUnicode=true&characterEncoding=utf-8";
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, usuario, password);

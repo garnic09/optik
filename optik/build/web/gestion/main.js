@@ -135,13 +135,41 @@ function cargarVista() {
         case 'home':
             cargarHome();
             break;
-        case 'compra':
-            cargarModuloCompra();
+        case 'venta':
+            cargarModuloVenta();
+            break;
+        case 'ventaLente':
+            cargarModuloVentaLente();
+            break;
+        case 'ventaLenteC':
+            cargarModuloVentaLenteC();
+            break;
+        case 'material':
+            cargarModuloMaterial();
             break;
     }
 }
 
 cargarVista();
+
+function cargarModuloMaterial() {
+    //Realizamos la petición al Servidor
+    fetch('material/material.html')
+            //Convertimos la respuesta en texto HTML
+            .then(response => {
+                return response.text();
+            })
+            //Procesamos el texto HTML
+            .then(function (data) {
+                //Cargamos el contenido dentro del contenedor principal
+                document.getElementById('contenedorPrincipal').innerHTML = data;
+                import('./material/material.js').then(obj => {
+                    ma = obj;
+                    ma.inicializar();
+                    localStorage.setItem('vistaActual', 'material');
+                });
+            });
+}
 
 function cargarHome() {
     fetch('home/home.html')
@@ -161,8 +189,8 @@ function cargarHome() {
             });
 }
 
-function cargarModuloCompra() {
-    fetch('venta/venta.html')
+function cargarModuloVenta() {
+    fetch('ventas/venta/venta.html')
             //Convertimos la respuesta en texto HTML
             .then(response => {
                 return response.text();
@@ -171,14 +199,49 @@ function cargarModuloCompra() {
             .then(function (data) {
                 //Cargamos el contenido dentro del contenedor principal
                 document.getElementById('contenedorPrincipal').innerHTML = data;
-                import('./venta/venta.js').then(obj => {
+                import('./ventas/venta/venta.js').then(obj => {
                     ma = obj;
                     ma.inicializar();
-                    localStorage.setItem('vistaActual', 'compra');
+                    localStorage.setItem('vistaActual', 'venta');
                 });
             });
 }
 
+function cargarModuloVentaLente() {
+    fetch('ventas/ventaLente/ventaLente.html')
+            //Convertimos la respuesta en texto HTML
+            .then(response => {
+                return response.text();
+            })
+            //Procesamos el texto HTML
+            .then(function (data) {
+                //Cargamos el contenido dentro del contenedor principal
+                document.getElementById('contenedorPrincipal').innerHTML = data;
+                import('./ventas/ventaLente/ventaLente.js').then(obj => {
+                    ma = obj;
+                    ma.inicializar();
+                    localStorage.setItem('vistaActual', 'ventaLente');
+                });
+            });
+}
+
+function cargarModuloVentaLenteC() {
+    fetch('ventas/ventaLenteC/ventaLenteC.html')
+            //Convertimos la respuesta en texto HTML
+            .then(response => {
+                return response.text();
+            })
+            //Procesamos el texto HTML
+            .then(function (data) {
+                //Cargamos el contenido dentro del contenedor principal
+                document.getElementById('contenedorPrincipal').innerHTML = data;
+                import('./ventas/ventaLenteC/ventaLenteC.js').then(obj => {
+                    ma = obj;
+                    ma.inicializar();
+                    localStorage.setItem('vistaActual', 'ventaLenteC');
+                });
+            });
+}
 
 function logOut() {
     let token = localStorage.getItem("currentUser");

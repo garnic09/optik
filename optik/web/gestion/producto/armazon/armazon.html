@@ -7,6 +7,7 @@
         <div class="card-body">
             <form>
                 <div class="row">
+
                     <div class="col-4">
                         <input type="hidden" class="form-control" id="txtidP" disabled> 
                     </div>
@@ -16,19 +17,30 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <label class="form-label">Codigo de Barras:</label><br>
-                        <input type="text" class="form-control" id="txtcodigoBarras" disabled><br>
-                        <!--<input type="text" class="form-control" disabled >-->
+                        <center>
+                            <img src="" alt="Armazon" style="width:180px;height:180px;" id="imgFoto" class="form-control">
+                        </center>
                     </div>
-                    <!-- Nombre -->
-                    <div class="col-4">
-                        <label class="form-label">Nombre:</label><br>
-                        <input type="text" class="form-control" id="txtNombre"><br>
-                    </div>
-                    <!-- Marca -->
-                    <div class="col-4">
-                        <label class="form-label">Marca:</label><br>
-                        <input type="text" class="form-control" id="txtMarca"><br>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="form-label">Codigo de Barras:</label><br>
+                                <input type="text" class="form-control" id="txtcodigoBarras" disabled><br>
+                                <!--<input type="text" class="form-control" disabled >-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Nombre -->
+                            <div class="col-6">
+                                <label class="form-label">Nombre:</label><br>
+                                <input type="text" class="form-control" id="txtNombre"><br>
+                            </div>
+                            <!-- Marca -->
+                            <div class="col-6">
+                                <label class="form-label">Marca:</label><br>
+                                <input type="text" class="form-control" id="txtMarca"><br>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -67,9 +79,13 @@
                     </div>
                 </div>
                 <div class="row">    
-                    <div class="col">
+                    <div class="col-6">
                         <label class="form-label">Descripcion:</label><br>
                         <input type="text" class="form-control" id="txtDescripcion"><br>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Fotografía:</label><br>
+                        <input type="file" class="form-control" id="fileInput"><br>
                     </div>
                 </div>
             </form>
@@ -87,7 +103,7 @@
     <div class="card">
         <div class="card-header">
             <button type="button" class="btn btn-primary" onClick="ma.getAll(1)">Activos</button>
-            <button type="button" class="btn btn-primary" onClick="ma.getAllInactivos(0)">Inactivos</button>
+            <button type="button" class="btn btn-primary" onClick="ma.getAll(0)">Inactivos</button>
             <form class="d-flex m-1" role="search">
                 <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
                 <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
@@ -104,11 +120,12 @@
                             <th>MARCA</th>
                             <th>MODELO</th>
                             <th>COLOR</th>
-                            <th>PRECIO COMPRA</th>
+                            <!--th>PRECIO COMPRA</th-->
                             <th>PRECIO VENTA</th>
-                            <th>EXISTENCIAS</th>
+                            <!--th>EXISTENCIAS</th-->
                             <th>DIMENSIONES</th>
                             <th>DESCRIPCION</th>
+                            <th>FOTOGRAFÍA</th>
                             <th>VER</th>
                             <th>ESTATUS</th>
                         </tr>
