@@ -22,17 +22,27 @@ import org.utl.dsm.optik.model.Cliente;
 
 
 public class ControllerCliente {
+    /*
+    El método insertar recibe un objeto Cliente y utiliza una conexión a una base de 
+    datos MySQL para llamar al procedimiento almacenado insertarCliente y agregar el 
+    cliente a la base de datos. El método devuelve el ID del nuevo cliente agregado a 
+    la base de datos.
+    */
     public int insertar(Cliente cliente) throws Exception{
+        //Paso 1: Preparar la sentencia sql
         String query = "call insertarCliente(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int idPersonaG = 0;
         int idClienteG = 0;
         String numeroUnicoG = "";
         
+        //Paso 2: Conectar a la BD
         ConexionMySQL conexion = new ConexionMySQL();
         Connection conn = conexion.open();
         
+        //Paso 3: Generar un objeto que permita preparar la llamada al procedure
         CallableStatement cstmt = conn.prepareCall(query);
         
+        //Paso 4: Asignar los valores para cada parametro
         cstmt.setString(1, cliente.getPersona().getNombre());
         cstmt.setString(2, cliente.getPersona().getApellidoPaterno());
         cstmt.setString(3, cliente.getPersona().getApellidoMaterno());
@@ -48,34 +58,50 @@ public class ControllerCliente {
         cstmt.setString(13, cliente.getPersona().getTelmovil());
         cstmt.setString(14, cliente.getPersona().getEmail());   
         
+        //Paso 5: Registrar parametros de salida del procedure
         cstmt.registerOutParameter(15, Types.INTEGER);
         cstmt.registerOutParameter(16, Types.INTEGER);
         cstmt.registerOutParameter(17, Types.VARCHAR);
         
+        //Paso 6: Ejecutar la llamada al procedure
         cstmt.executeUpdate();
+        
+        // Paso 7 recuperar los parametros de salida 
         idPersonaG = cstmt.getInt(15);
         idClienteG = cstmt.getInt(16);
         numeroUnicoG = cstmt.getString(17);
         
+         // Paso 8 insertar los valores en el objeto 
         cliente.getPersona().setIdPersona(idPersonaG);
         cliente.setIdCliente(idClienteG);
         cliente.setNumeroUnico(numeroUnicoG);
         
+         // Paso 9 cerrar objetos de conexion
         cstmt.close();
         conn.close();
         conexion.close();
 
+         // Paso 10 devolver o return el id generado
         return idClienteG;
     }
     
+    /*
+    El método actualizar recibe un objeto Cliente y actualiza los detalles de ese cliente 
+    en la base de datos, llamando al procedimiento almacenado actualizarCliente.
+    */
     public void actualizar(Cliente cliente) throws Exception{
+        
+         //Paso 1: Preparar la sentencia sql
         String query = "call actualizarCliente(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         
+        //Paso 2: Conectar a la BD
         ConexionMySQL conexion = new ConexionMySQL();
         Connection conn = conexion.open();     
         
+        //Paso 3: Generar un objeto que permita preparar la llamada al procedure
         CallableStatement cstmt = conn.prepareCall(query);
         
+        //Paso 4: Asignar los valores para cada parametro
         cstmt.setString(1, cliente.getPersona().getNombre());
         cstmt.setString(2, cliente.getPersona().getApellidoPaterno());
         cstmt.setString(3, cliente.getPersona().getApellidoMaterno());
@@ -94,43 +120,77 @@ public class ControllerCliente {
         cstmt.setInt(15, cliente.getPersona().getIdPersona());
         cstmt.setInt(16, cliente.getIdCliente());
         
+        //Paso 5: Ejecutar la llamada al procedure
         cstmt.executeUpdate();
         
+        // Paso 6 cerrar objetos de conexion 
         cstmt.close();
         conn.close();
         conexion.close();        
     }
     
+    /*
+    El método eliminar recibe un objeto Cliente y lo elimina de la base de datos 
+    utilizando el procedimiento almacenado eliminarCliente.
+    */
     public void eliminar(Cliente cliente) throws Exception{
+        //Paso 1: Preparar la sentencia sql
         String query = "call eliminarCliente(?)";
+        
+        //Paso 2: Conectar a la BD
         ConexionMySQL conexion = new ConexionMySQL();
         Connection conn = conexion.open();
         
         //Paso 3: Generar un objeto que permita preparar la llamada al procedure
         CallableStatement cstmt = conn.prepareCall(query);
+        
+         //Paso 4: Asignar los valores para cada parametro
         cstmt.setInt(1, cliente.getIdCliente());
+        
+        //Paso 5: Ejecutar la llamada al procedure
         cstmt.executeUpdate();
+        
+        // Paso 6 cerrar objetos de conexion
         cstmt.close();
         conn.close();
         conexion.close();
     } 
+    /*
+    El método activar recibe un objeto Cliente y lo activa en la base de datos 
+    utilizando el procedimiento almacenado activarCliente.
+    */
     
     public void activar(Cliente cliente) throws Exception{
+        //Paso 1: Preparar la sentencia sql
         String query = "call activarCliente(?)";
+        
+        //Paso 2: Conectar a la BD
         ConexionMySQL conexion = new ConexionMySQL();
         Connection conn = conexion.open();
         
+        //Paso 3: Generar un objeto que permita preparar la llamada al procedure
         CallableStatement cstmt = conn.prepareCall(query);
+        //Paso 4: Asignar los valores para cada parametro
         cstmt.setInt(1, cliente.getIdCliente());
+        //Paso 5: Ejecutar la llamada al procedure
         cstmt.executeUpdate();
+        // Paso 6 cerrar objetos de conexion 
         cstmt.close();
         conn.close();
         conexion.close();
     }
+    /* 
+    El método getAll recibe una cadena filtro que se utiliza para filtrar los 
+    resultados de la consulta. El método utiliza la consulta SQL 
+    SELECT * FROM vistaC WHERE estatus = ? para obtener todos los clientes 
+    con el estado especificado. Retorna una lista de objetos Cliente que 
+    contienen la información de los clientes recuperados de la base de datos.
+    */
     
     public List<Cliente> getAll(String filtro) throws SQLException{
+         //Paso 1: Preparar la sentencia sql
         String query = "SELECT * FROM vistaC WHERE estatus="+filtro+";";
-        
+        //Paso 2: Conectar a la BD
         ConexionMySQL objConexion = new ConexionMySQL();
         // Abro la conexion
         Connection conn = objConexion.open();
@@ -166,9 +226,11 @@ public class ControllerCliente {
             clientes.add(c); 
             
         }
+        // Cerramos conexiones
         rs.close();
         pstmt.close();
         conn.close();
+        // Devolvemos la lista de clientes
         return clientes;        
     }
 }

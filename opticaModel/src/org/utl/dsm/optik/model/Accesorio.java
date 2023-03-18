@@ -11,7 +11,8 @@ package org.utl.dsm.optik.model;
 public class Accesorio {
     private int idAccesorio;
     private Producto producto;
-
+    
+    //Constructores
     public Accesorio() {
     }
 
@@ -24,6 +25,7 @@ public class Accesorio {
         this.producto = idProducto;
     }
 
+    //Getters y setters
     public int getIdAccesorio() {
         return idAccesorio;
     }
@@ -39,6 +41,9 @@ public class Accesorio {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Accesorio{" + "idAccesorio=" + idAccesorio + ", producto=" + producto + '}';
+    }
 }

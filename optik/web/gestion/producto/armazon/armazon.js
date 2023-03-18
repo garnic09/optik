@@ -5,6 +5,7 @@
 
 /* global fetch */
 let armazones = [];
+let foto = "";
 //var base64String = "";
 
 export function inicializar() {
@@ -29,10 +30,9 @@ export function insertar() {
             let color = document.getElementById("txtColor").value;
             let dimensiones = document.getElementById("txtDimensiones").value;
             let descripcion = document.getElementById("txtDescripcion").value;
-            let fotografia = document.getElementById("txtDescripcion").value;//encodeImageFileAsURL();//necesitas ver como guardar la cadena que devuelve esta funcion encodeImageFileAsURL aqui
-
+            
             let producto = {nombre: nombre, marca: marca, precioCompra: precioCompra, precioVenta: precioVenta, existencias: existencias};
-            let a = {modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: fotografia, producto: producto};
+            let a = {modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: foto, producto: producto};
 
             let armazon = {datosArmazon: JSON.stringify(a), lastToken: lToken};
             //alert(JSON.stringify(a));
@@ -95,11 +95,10 @@ export function actualizar() {
             let color = document.getElementById("txtColor").value;
             let dimensiones = document.getElementById("txtDimensiones").value;
             let descripcion = document.getElementById("txtDescripcion").value;
-            let fotografia = document.getElementById("txtDescripcion").value;
 
 
             let producto = {idProducto: idProducto, nombre: nombre, marca: marca, precioCompra: precioCompra, precioVenta: precioVenta, existencias: existencias};
-            let a = {idArmazon: idArmazon, modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: fotografia, producto: producto};
+            let a = {idArmazon: idArmazon, modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: foto, producto: producto};
 
             let armazon = {datosArmazon: JSON.stringify(a), lastToken: lToken};
             //alert(JSON.stringify(a));
@@ -137,7 +136,7 @@ export function getAll(estatus) {
             let datos = {estatus: estatus, lastToken: lToken};
             let parametros = new URLSearchParams(datos);
 
-            fetch("http://localhost:8080/optik/api/restoptik/getAllArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
+            fetch("../api/restoptik/getAllArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
                     .then(response => response.json())
                     .then(data => {
                         if (data.error) {
@@ -174,12 +173,13 @@ export function cargarTablaArmazon(coincidencias, data) {
         contenido += "<td>" + armazon.producto.marca + "</td>";
         contenido += "<td>" + armazon.modelo + "</td>";
         contenido += "<td>" + armazon.color + "</td>";
-        contenido += "<td>" + armazon.producto.precioCompra + "</td>";
+//        contenido += "<td>" + armazon.producto.precioCompra + "</td>";
         contenido += "<td>" + armazon.producto.precioVenta + "</td>";
-        contenido += "<td>" + armazon.producto.existencias + "</td>";
+//        contenido += "<td>" + armazon.producto.existencias + "</td>";
         contenido += "<td>" + armazon.dimensiones + "</td>";
         contenido += "<td>" + armazon.descripcion + "</td>";
-        contenido += "<td><button class='btn btn-primary btn-m m-2'  type='button' onclick='ma.cargarForm(" + index + ");'>ver</button> </td>";
+        contenido += "<td><button class='btn btn-primary btn-m m-2'  type='button' onclick='ma.loadFoto(" + index + ");'>Foto</button> </td>";
+        contenido += "<td><button class='btn btn-primary btn-m m-2'  type='button' onclick='ma.cargarForm(" + index + ");'>Ver</button> </td>";
         if (armazon.estatus === 1) {
             contenido += "<td><button class='btn btn-danger btn-m m-2'  type='button' onclick='ma.estatusInactivo(" + armazon.idArmazon + ");'>Eliminar</button></td>";
         } else {
@@ -388,4 +388,32 @@ function validar() {
         return false;
     }
     return true;
+}
+
+// Converitr imagen a base64 para guardar en base de datos
+const fileInput = document.getElementById("fileInput");
+
+fileInput.addEventListener("change", e => {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+        foto = reader.result;
+        console.log(reader.result);
+    });
+    reader.readAsDataURL(file);
+});
+
+// intentar cargar la imagen
+
+export function loadFoto(i) {
+    var image = new Image();
+    image.src = armazones[i].fotografia;
+
+    var w = window.open("");
+    w.document.write(image.outerHTML);
+}
+
+export function limpiarTablaArmazon(){
+    document.getElementById("tbArmazon").innerHTML = "";
 }

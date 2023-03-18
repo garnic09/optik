@@ -13,6 +13,8 @@ import java.util.List;
 import org.utl.dsm.optik.model.Empleado;
 import org.utl.dsm.optik.model.Persona;
 import org.utl.dsm.optik.model.Usuario;
+import org.utl.dsm.optik.model.TipoMica;
+import org.utl.dsm.optik.model.ExamenVista;
 
 /**
  *
@@ -21,7 +23,7 @@ import org.utl.dsm.optik.model.Usuario;
 public class prueba {
 
     public static void main(String[] args) {
-        probarAcceso();
+        probarGetAll();
     }
 
     public static void probarConexion() {
@@ -137,12 +139,12 @@ public class prueba {
     public static void probarGetAll(){
         try {
             // Paso 1: Invocar el controller
-            ControllerEmpleado objCe = new ControllerEmpleado();
+            ControllerTipoMica objCe = new ControllerTipoMica();
             // Paso 2: Invocar el metodo
-            List<Empleado> empleados = objCe.getAll("1");
+            List<TipoMica> tipoMicas = objCe.getAllMica();
             // Paso 3: Recorrer y mostrar los resultados
-            for (int i = 0; i < empleados.size(); i++) {
-                System.out.println(empleados.get(i).toString());
+            for (int i = 0; i < tipoMicas.size(); i++) {
+                System.out.println(tipoMicas.get(i).toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
