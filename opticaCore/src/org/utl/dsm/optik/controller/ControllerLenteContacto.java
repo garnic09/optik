@@ -44,7 +44,7 @@ public class ControllerLenteContacto {
             a.setProducto(p);
             a.setIdLenteContacto(rs.getInt("ID"));
             a.setKeratometria(rs.getString("Keratometria"));
-            a.setFoto(rs.getString("Fotografía"));
+            a.setFoto(rs.getString("Fotografia"));
             
             lentesContacto.add(a);
         }

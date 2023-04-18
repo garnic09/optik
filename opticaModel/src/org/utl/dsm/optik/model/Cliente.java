@@ -18,6 +18,10 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
     public Cliente(String numeroUnico, int estatus, Persona persona) {
         this.numeroUnico = numeroUnico;
         this.estatus = estatus;

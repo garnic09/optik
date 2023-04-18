@@ -22,6 +22,10 @@ public class GraduacionLentes {
     public GraduacionLentes() {
     }
 
+    public GraduacionLentes(int idGraduacion) {
+        this.idGraduacion = idGraduacion;
+    }
+
     public GraduacionLentes(double esferaod, double esferaoi, int cilindrood, int cilindrooi, int ejeod, int ejeoi, String dip, int estatus) {
         this.esferaod = esferaod;
         this.esferaoi = esferaoi;

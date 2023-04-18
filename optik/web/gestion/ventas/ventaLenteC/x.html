@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Venta de Lentes de Contacto</h2>
+        </div>
+    </div>
+</div>
+<div class="container mt-1 mb-5">
+    <div class="card mt-1">
+        <div class="card-body">
+            <!--div class="form-floating mt-2 mb-2"  style="text-align: center">
+                <input disabled type="text" id="txtEmpleado" placeholder="Empleado" class="form-control">
+                <label for="txtEmpleado" class="form-label mx-3">Empleado: </label>
+            </div-->
+            <div class=" mt-2 mb-2"  style="text-align: center">
+                <label class="form-label">Cliente atendido: </label>
+                <input disabled type="text" id="txtCliente" class="form-control">
+            </div>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Seleccionar un cliente
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+
+                            <div class="d-flex m-3">
+                                <input class="form-control me-2 " type="search" placeholder="Búsqueda cliente" aria-label="Search" id="txtSearch">
+                                <button class="btn btn-outline-primary" type="button" onclick="ma.search()">Buscar</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm">  
+                                    <caption>Lista de clientes</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">NOMBRE</th>
+                                            <th scope="col">DIRECCIÓN</th>
+                                            <th scope="col">CORREO</th>
+                                            <th scope="col">+</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbCliente">                      
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-6">
+                    <label class="form-label">Exámen de Vista:</label><br>
+                    <select class="form-control" id="slcExamenVista" name="examenVista" required>
+                        <option value="" selected>Examen de la vista</option>
+                    </select><br>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Lente de Contacto:</label><br>
+                    <select class="form-control" id="slcLenteContacto" onchange="ma.agregarLenteC()" required>
+                        <option value="" selected>Lente de contacto</option>
+                    </select><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-5">  
+        <div class="card-header">
+            <h2 class="text-center">Carrito</h2>
+        </div>
+        <div class="card-body">
+            <form class="d-flex m-1 justify-content-between align-middle">
+                <label class="">Total: <label class="" id="total"></label></label>
+                <button class="btn btn-outline-primary" type="button" onclick="ma.realizarVenta()">Realizar Venta</button>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">  
+                    <caption>Carrito de lentes </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">PRECIO</th>
+                            <th scope="col">CANTIDAD</th>
+                            <th scope="col">DESCUENTO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbProductoA">                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

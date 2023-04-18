@@ -8,10 +8,12 @@ import org.utl.dsm.optik.db.ConexionMySQL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.utl.dsm.optik.model.DetalleVentaPresupuestoLC;
+import org.utl.dsm.optik.model.DetalleVentaPresupuestoL;
 /**
  *
  * @author garni
@@ -23,14 +25,15 @@ public class ControllerVentaLC {
         Connection conn = connMySQL.open();
         Statement stmnt = null;
         ResultSet rs = null;
+        PreparedStatement pstmt = null;
 
         try {
             conn.setAutoCommit(false);
             stmnt = conn.createStatement();
-            // Se inserta la venta
             String query1 = "INSERT INTO venta (idEmpleado, clave) "
                     + "VALUES (" + dvp.getVenta().getEmpleado().getIdEmpleado()
-                    + ',' + dvp.getVenta().getClave() + ");";
+                    + ",'" + dvp.getVenta().getClave() + "');";
+            // Se inserta la venta
             stmnt.execute(query1);
             // Se obtiene el id de la venta que se ha insertado
             String query2 = "SELECT LAST_INSERT_ID()";
@@ -44,7 +47,8 @@ public class ControllerVentaLC {
                 String query3 = "INSERT INTO presupuesto"
                         + "(idExamenVista, clave)"
                         + "VALUES (" + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getPresupuesto().getExamenVista().getIdExamenVista()
-                        + "," + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getPresupuesto().getClave() + " );";
+                        + ",'" + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getPresupuesto().getClave() + "' );";
+
                 stmnt.execute(query3);
                 //Se obtiene el id del presupuesto generado
                 rs = stmnt.executeQuery(query2);
@@ -52,12 +56,12 @@ public class ControllerVentaLC {
                     dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getPresupuesto().setIdPresupuesto(rs.getInt(1));
                 }
 
-                //Se inserta en presupuesto_lentescontacto                
+                //Se inserta en presupuesto_lentescontacto 
                 String query4 = "INSERT INTO presupuesto_lentescontacto"
                         + "(idExamenVista, idLenteContacto, clave)"
                         + "VALUES (" + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getPresupuesto().getExamenVista().getIdExamenVista() + ","
-                        + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getLenteContacto().getIdLenteContacto()+ ","
-                        + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getClave() + ");";
+                        + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getLenteContacto().getIdLenteContacto() + ","
+                        + "'" + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getClave() + "');";
                 stmnt.execute(query4);
                 //Se obtiene el id del presupuesto_lentescontacto generado
                 rs = stmnt.executeQuery(query2);
@@ -73,18 +77,37 @@ public class ControllerVentaLC {
                         + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getPresupuesto().getIdPresupuesto() + ","
                         + dvp.getListVentaPresupuestoLC().get(i).getCantidad() + ","
                         + dvp.getListVentaPresupuestoLC().get(i).getPrecioUnitario() + ","
-                        + dvp.getListVentaPresupuestoLC().get(i).getDescuento()+ ");";
+                        + dvp.getListVentaPresupuestoLC().get(i).getDescuento() + ");";
                 stmnt.execute(query5);
+                
+                String sqlActualizar = "UPDATE producto SET existencias = existencias - " + dvp.getListVentaPresupuestoLC().get(i).getCantidad() + " WHERE producto.idProducto = " + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getLenteContacto().getProducto().getIdProducto() + ";";
+                System.out.println(sqlActualizar);
+                stmnt = conn.createStatement();
+                stmnt.executeUpdate(sqlActualizar);
+                // Verificar el inventario
+                String sqlVerificar = "SELECT existencias FROM producto WHERE idProducto = " + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getLenteContacto().getProducto().getIdProducto();
+                pstmt = conn.prepareStatement(sqlVerificar);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    int existencias = rs.getInt("existencias");
+                    if (existencias <= 0) {
+                        String sqlEstatus = "UPDATE producto SET estatus = 0 WHERE idProducto = " + dvp.getListVentaPresupuestoLC().get(i).getPresupuestoVentaLC().getLenteContacto().getProducto().getIdProducto();
+                        stmnt = conn.createStatement();
+                        stmnt.execute(sqlEstatus);
+                    }
+                }
             }
             conn.commit();
             conn.setAutoCommit(true);
+            
             stmnt.close();
+            pstmt.close();
             conn.close();
             r = true;
 
-        } catch (SQLException ex) { 
+        } catch (SQLException ex) {
             Logger.getLogger(ControllerVentaLC.class.getName()).log(Level.SEVERE, null, ex);
-                   try {
+            try {
 
                 conn.rollback();
                 conn.setAutoCommit(true);
@@ -98,108 +121,109 @@ public class ControllerVentaLC {
         return r;
     }
     
-    
-//    public boolean generarVentaLentes(DetalleVentaPreLen dvp) {
-//        boolean r = false;
-//
-//        //Creamos un objeto conexión con MySQL
-//        ConexionMySQL connMySQL = new ConexionMySQL();
-//        //objeto de tipo Connection que abre la conexión
-//        Connection conn = connMySQL.open();
-//        //objeto de Statement
-//        Statement stmt = null;
-//        //objeto de ResultSet
-//        ResultSet rs = null;
-//        /*NOTA: Los objetos quedan afuera del try catch, para poder utilizarlos en todo el método
-//         */
-//        try {
-//            //el autocommit se prepara para no ejecutar en automatico las sentencias
-//            //sino esperar a que termine la transaccion 
-//            conn.setAutoCommit(false);
-//            stmt = conn.createStatement();
-//
-//            //esta query se utiliza varias veces
-//            String query = "SELECT LAST_INSERT_ID()";
-//
-//            //Se genera la venta
-//            String query0 = "INSERT INTO venta(idEmpleado, clave) VALUES ("
-//                    + dvp.getVenta().getEmpleado().getIdEmpleado() + ","
-//                    + dvp.getVenta().getClave() + ");";
-//            stmt.execute(query0);
-//            //Se obtiene el id genrado con la insercion de venta
-//            rs = stmt.executeQuery(query);
-//            if (rs.next()) {
-//                dvp.getVenta().setIdVenta(rs.getInt(1));
-//            }
-//
-//            //Se insertan varios presupuestos, por lo tanto se Cicla
-//            for (int i = 0; i < dvp.getVentaPresupuestoLentes().size(); i++) {
-//
-//                //Se insertan los presupuestos
-//                String query1 = "INSERT INTO presupuesto(idExamenVista, clave)"
-//                        + "VALUES (" + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getPresupuesto().getExamenVista().getIdExamenVista() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getPresupuesto().getClave()+ ");";
-//                stmt.execute(query1);
-//                rs = stmt.executeQuery(query);
-//                //Obtenemos el id de presupuesto y lo guardamos
-//                if (rs.next()) {
-//                    dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getPresupuesto().setIdPresupuesto(rs.getInt(1));
-//                }
-//
-//                //Se insertan los presupuestos de lentes
-//                String query2 = "INSERT INTO presupuesto_Lentes(idPresupuesto, alturaOblea, idTipoMica, idMaterial, idArmazon)"
-//                        + "VALUES (" + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getPresupuesto().getIdPresupuesto() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getAlturaOblea() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getTipoMica().getIdTipoMica() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getMaterial().getIdMaterial() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getArmazon().getIdArmazon() + ");";
-//                stmt.execute(query2);
-//                //Obtenermos el id de presupuesto_Lentes  y se guarda en su objeto
-//                rs = stmt.executeQuery(query);                
-//                if (rs.next()) {
-//                    dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().setIdPresupuestoLentes(rs.getInt(1));
-//                }
-//                
-//                //Se almacenana los tratamientos que tiene ese lente presupuestado
-//                //Va en un ciclo por que se tiene la posibilidad de elegir varios tratamientos
-//                for (int j = 0; j < dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getTratamientos().size(); j++) {
-//                    String query3 = "INSERT INTO presupuesto_lentes_tratamientos VALUES("
-//                            + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getIdPresupuestoLentes() + ","
-//                            + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getTratamientos().get(j).getIdTratamiento()+ ");";
-//                    stmt.execute(query3);
-//                    
-//                }
-//                //Query numero 4 para almacenar la relacion de venta_presupuesto
-//                String query4 = "INSERT INTO venta_presupuesto VALUES("
-//                        + dvp.getVenta().getIdVenta() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPresupuestoL().getPresupuesto().getIdPresupuesto() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getCantidad() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getPrecioUnitario() + ","
-//                        + dvp.getVentaPresupuestoLentes().get(i).getDescuento() + ");";
-//                stmt.execute(query4);
-//            }
-//            
-//            //Ya con todas las sentencias ejecutadas, se envia la conformación de ejecutar la transaccion
-//            conn.commit();
-//            //Se cierran los objetos de BD
-//            conn.setAutoCommit(true);
-//            rs.close();
-//            stmt.close();
-//            r = true;
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ControllerVentaLC.class.getName()).log(Level.SEVERE, null, ex);
-//            try {
-//                //En caso de error se indica un rollback a la transaccion. 
-//                conn.rollback();
-//                conn.setAutoCommit(true);
-//                r = false;
-//
-//            } catch (SQLException ex1) {
-//                Logger.getLogger(ControllerVentaLC.class.getName()).log(Level.SEVERE, null, ex);
-//                r = false;
-//            }
-//        }
-//        return r;
-//    }
+    public boolean generarVentaLentes(DetalleVentaPresupuestoL dvp) {
+        boolean r = false;
+
+        //Creamos un objeto conexión con MySQL
+        ConexionMySQL connMySQL = new ConexionMySQL();
+        //objeto de tipo Connection que abre la conexión
+        Connection conn = connMySQL.open();
+        //objeto de Statement
+        Statement stmt = null;
+        //objeto de ResultSet
+        ResultSet rs = null;
+        /*NOTA: Los objetos quedan afuera del try catch, para poder utilizarlos en todo el método
+         */
+        try {
+            //el autocommit se prepara para no ejecutar en automatico las sentencias
+            //sino esperar a que termine la transaccion 
+            conn.setAutoCommit(false);
+            stmt = conn.createStatement();
+
+            //esta query se utiliza varias veces
+            String query = "SELECT LAST_INSERT_ID()";
+
+            //Se genera la venta
+            String query0 = "INSERT INTO venta (idEmpleado, clave) "
+                    + "VALUES (" + dvp.getVenta().getEmpleado().getIdEmpleado()
+                    + ",'" + dvp.getVenta().getClave() + "');";
+            stmt.execute(query0);
+            //Se obtiene el id genrado con la insercion de venta
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                dvp.getVenta().setIdVenta(rs.getInt(1));
+            }
+
+            //Se insertan varios presupuestos, por lo tanto se Cicla
+            for (int i = 0; i < dvp.getListVentaPresupuestoL().size(); i++) {
+
+                //Se insertan los presupuestos
+                String query1 = "INSERT INTO presupuesto(idExamenVista, clave)"
+                        + "VALUES (" + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getPresupuesto().getExamenVista().getIdExamenVista() + ","
+                        + "'" + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getPresupuesto().getClave()+ "'" + ");";
+
+                stmt.execute(query1);
+                rs = stmt.executeQuery(query);
+                //Obtenemos el id de presupuesto y lo guardamos
+                if (rs.next()) {
+                    dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getPresupuesto().setIdPresupuesto(rs.getInt(1));
+                }
+
+                //Se insertan los presupuestos de lentes
+                String query2 = "INSERT INTO presupuesto_Lentes(idPresupuesto, alturaOblea, idTipoMica, idMaterial, idArmazon)"
+                        + "VALUES (" + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getPresupuesto().getIdPresupuesto() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getAlturaOblea() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getTipoMica().getIdTipoMica() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getMaterial().getIdMaterial() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getArmazon().getIdArmazon() + ");";
+
+                stmt.execute(query2);
+                //Obtenermos el id de presupuesto_Lentes  y se guarda en su objeto
+                rs = stmt.executeQuery(query);
+                if (rs.next()) {
+                    dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().setIdPresupuestoLentes(rs.getInt(1));
+                }
+
+                //Se almacenana los tratamientos que tiene ese lente presupuestado
+                //Va en un ciclo por que se tiene la posibilidad de elegir varios tratamientos
+                for (int j = 0; j < dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getListTratamientos().size(); j++) {
+                    String query3 = "INSERT INTO presupuesto_lentes_tratamientos VALUES("
+                            + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getIdPresupuestoLentes() + ","
+                            + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getListTratamientos().get(j).getIdTratamiento() + ");";
+                    stmt.execute(query3);
+
+                }
+                //Query numero 4 para almacenar la relacion de venta_presupuesto
+                String query4 = "INSERT INTO venta_presupuesto VALUES("
+                        + dvp.getVenta().getIdVenta() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getPresupuestoLente().getPresupuesto().getIdPresupuesto() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getCantidad() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getPrecioUnitario() + ","
+                        + dvp.getListVentaPresupuestoL().get(i).getDescuento()+ ");";
+                stmt.execute(query4);
+            }
+
+            //Ya con todas las sentencias ejecutadas, se envia la conformación de ejecutar la transaccion
+            conn.commit();
+            //Se cierran los objetos de BD
+            conn.setAutoCommit(true);
+            rs.close();
+            stmt.close();
+            r = true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerVentaLC.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                //En caso de error se indica un rollback a la transaccion. 
+                conn.rollback();
+                conn.setAutoCommit(true);
+                r = false;
+
+            } catch (SQLException ex1) {
+                Logger.getLogger(ControllerVentaLC.class.getName()).log(Level.SEVERE, null, ex);
+                r = false;
+            }
+        }
+        return r;
+    }
 }

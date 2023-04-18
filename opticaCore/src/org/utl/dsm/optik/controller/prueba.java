@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import org.utl.dsm.optik.model.Empleado;
+import org.utl.dsm.optik.model.ExamenVista;
 import org.utl.dsm.optik.model.Persona;
 import org.utl.dsm.optik.model.Usuario;
 
@@ -21,7 +22,7 @@ import org.utl.dsm.optik.model.Usuario;
 public class prueba {
 
     public static void main(String[] args) {
-        probarAcceso();
+        probarExamenV();
     }
 
     public static void probarConexion() {
@@ -162,6 +163,21 @@ public class prueba {
             System.out.println("Acceso concedido");
         }catch (Exception ex){
             System.out.println("Acceso denegado");
+        }
+    }
+    
+    public static void probarExamenV(){
+        
+        ControllerExamenVista ce = new ControllerExamenVista();
+        try {
+            // Paso 2 invocar el metodo
+            List<ExamenVista> examenVistas = ce.getAllExamen(1);
+            // recorrer y mostrar los resultados
+            for (int i = 0; i <examenVistas.size(); i++) {
+                System.out.println(examenVistas.get(i).toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(prueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

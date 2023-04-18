@@ -16,22 +16,20 @@ public class Armazon {
     private String dimensiones;
     private String descripcion;
     private String fotografia;
-    private int estatus;
 
     public Armazon() {
     }
     //constructor para insertar todos los datos menos el id
-    public Armazon(Producto producto, String modelo, String color, String dimensiones, String descripcion, String fotografia , int estatus) {
+    public Armazon(Producto producto, String modelo, String color, String dimensiones, String descripcion, String fotografia) {
         this.producto = producto;
         this.modelo = modelo;
         this.color = color;
         this.dimensiones = dimensiones;
         this.descripcion = descripcion;
         this.fotografia = fotografia;
-        this.estatus = estatus;
     }
 
-    public Armazon(int idArmazon, Producto producto, String modelo, String color, String dimensiones, String descripcion, String fotografia , int estatus ) {
+    public Armazon(int idArmazon, Producto producto, String modelo, String color, String dimensiones, String descripcion, String fotografia) {
         this.idArmazon = idArmazon;
         this.producto = producto;
         this.modelo = modelo;
@@ -39,15 +37,6 @@ public class Armazon {
         this.dimensiones = dimensiones;
         this.descripcion = descripcion;
         this.fotografia = fotografia;
-        this.estatus = estatus;
-    }
-
-    public int getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(int estatus) {
-        this.estatus = estatus;
     }
 
     public int getIdArmazon() {

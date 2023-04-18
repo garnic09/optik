@@ -13,6 +13,10 @@ public class Empleado {
     public Empleado() {
     }
 
+    public Empleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
     public Empleado(String numeroUnico, int estatus, Persona persona, Usuario usuario) {
         this.numeroUnico = numeroUnico;
         this.estatus = estatus;

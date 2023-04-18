@@ -137,6 +137,7 @@ public class ControllerArmazon {
             p.setPrecioVenta(rs.getDouble("precioVenta"));
             p.setExistencias(rs.getInt("existencias"));
             p.setIdProducto(rs.getInt("idProducto"));
+            p.setEstatus(rs.getInt("estatus"));
            
              Armazon a = new Armazon();
             /*ARMAZON*/
@@ -147,7 +148,6 @@ public class ControllerArmazon {
             a.setDimensiones(rs.getString("dimensiones"));
             a.setDescripcion(rs.getString("descripcion"));
             a.setFotografia(rs.getString("fotografia"));
-            a.setEstatus(rs.getInt("estatus"));
             
             armazones.add(a);
             

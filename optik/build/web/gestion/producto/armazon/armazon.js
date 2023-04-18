@@ -13,14 +13,14 @@ export function inicializar() {
 }
 
 export function insertar() {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
-        try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
-            if (!validar()) {
-                return;
-            }
+   // console.log(localStorage.getItem("currentUser"));
+    //if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+//        try {
+//            let arm = JSON.parse(localStorage.getItem("currentUser"));
+//            let lToken = arm.usuario.lastToken;
+//            if (!validar()) {
+//                return;
+//            }
             let nombre = document.getElementById("txtNombre").value;
             let marca = document.getElementById("txtMarca").value;
             let precioCompra = document.getElementById("txtPrecioCompra").value;
@@ -34,12 +34,12 @@ export function insertar() {
             let producto = {nombre: nombre, marca: marca, precioCompra: precioCompra, precioVenta: precioVenta, existencias: existencias};
             let a = {modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: foto, producto: producto};
 
-            let armazon = {datosArmazon: JSON.stringify(a), lastToken: lToken};
+            let armazon = {datosArmazon: JSON.stringify(a)};
             //alert(JSON.stringify(a));
 
             let parametros = new URLSearchParams(armazon);
 
-            fetch("http://localhost:8080/optik/api/restoptik/insertArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
+            fetch("../api/restoptik/insertArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
                     .then(response => response.json())
                     .then(data => function (data) {
                             console.log(data);
@@ -53,14 +53,14 @@ export function insertar() {
                 getAll(1);
             }, 2000);
             limpiarForm();
-        } catch (e) {
-            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-            window.location.href = "http://localhost:8080/optik/";
-        }
-    } else {
-        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-        window.location.href = "http://localhost:8080/optik/";
-    }
+//        } catch (e) {
+//            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//            window.location.href = "http://localhost:8080/optik/";
+//        }
+//    } else {
+//        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//        window.location.href = "http://localhost:8080/optik/";
+//    }
 }
 
 // necesitas ver como hacer que la funcion no abra una nueva ventana con la cadena de texto
@@ -76,14 +76,14 @@ export function encodeImageFileAsURL(element) {
 }
 
 export function actualizar() {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
-        try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
-            if (!validar()) {
-                return;
-            }
+//    console.log(localStorage.getItem("currentUser"));
+//    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+//        try {
+//            let arm = JSON.parse(localStorage.getItem("currentUser"));
+//            let lToken = arm.usuario.lastToken;
+//            if (!validar()) {
+//                return;
+//            }
             let idProducto = document.getElementById("txtidP").value;
             let idArmazon = document.getElementById("txtidA").value;
             let nombre = document.getElementById("txtNombre").value;
@@ -100,12 +100,12 @@ export function actualizar() {
             let producto = {idProducto: idProducto, nombre: nombre, marca: marca, precioCompra: precioCompra, precioVenta: precioVenta, existencias: existencias};
             let a = {idArmazon: idArmazon, modelo: modelo, color: color, dimensiones: dimensiones, descripcion: descripcion, fotografia: foto, producto: producto};
 
-            let armazon = {datosArmazon: JSON.stringify(a), lastToken: lToken};
+            let armazon = {datosArmazon: JSON.stringify(a)};
             //alert(JSON.stringify(a));
 
             let parametros = new URLSearchParams(armazon);
 
-            fetch("http://localhost:8080/optik/api/restoptik/actualizarArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
+            fetch("../api/restoptik/actualizarArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
                     .then(response => response.json())
                     .then(data => function (data) {
                             if (data.error) {
@@ -117,23 +117,23 @@ export function actualizar() {
                 getAll(1);
             }, 2000);
             limpiarForm();
-        } catch (e) {
-            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-            window.location.href = "http://localhost:8080/optik/";
-        }
-    } else {
-        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-        window.location.href = "http://localhost:8080/optik/";
-    }
+//        } catch (e) {
+//            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//            window.location.href = "http://localhost:8080/optik/";
+//        }
+//    } else {
+//        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//        window.location.href = "http://localhost:8080/optik/";
+//    }
 }
 
 export function getAll(estatus) {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
-        try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
-            let datos = {estatus: estatus, lastToken: lToken};
+//    console.log(localStorage.getItem("currentUser"));
+//    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+//        try {
+//            let arm = JSON.parse(localStorage.getItem("currentUser"));
+//            let lToken = arm.usuario.lastToken;
+            let datos = {estatus: estatus};
             let parametros = new URLSearchParams(datos);
 
             fetch("../api/restoptik/getAllArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
@@ -146,14 +146,14 @@ export function getAll(estatus) {
                         }
                         JSON.stringify(data);
                     });
-        } catch (e) {
-            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-            window.location.href = "http://localhost:8080/optik/";
-        }
-    } else {
-        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-        window.location.href = "http://localhost:8080/optik/";
-    }
+//        } catch (e) {
+//            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//            window.location.href = "http://localhost:8080/optik/";
+//        }
+//    } else {
+//        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//        window.location.href = "http://localhost:8080/optik/";
+//    }
 }
 
 export function cargarTablaArmazon(coincidencias, data) {
@@ -178,7 +178,7 @@ export function cargarTablaArmazon(coincidencias, data) {
 //        contenido += "<td>" + armazon.producto.existencias + "</td>";
         contenido += "<td>" + armazon.dimensiones + "</td>";
         contenido += "<td>" + armazon.descripcion + "</td>";
-        contenido += "<td><button class='btn btn-primary btn-m m-2'  type='button' onclick='ma.loadFoto(" + index + ");'>Foto</button> </td>";
+        contenido += "<td><button class='btn btn-warning btn-m m-2'  type='button' onclick='ma.loadFoto(" + index + ");'>Foto</button> </td>";
         contenido += "<td><button class='btn btn-primary btn-m m-2'  type='button' onclick='ma.cargarForm(" + index + ");'>Ver</button> </td>";
         if (armazon.estatus === 1) {
             contenido += "<td><button class='btn btn-danger btn-m m-2'  type='button' onclick='ma.estatusInactivo(" + armazon.idArmazon + ");'>Eliminar</button></td>";
@@ -212,7 +212,7 @@ export function getAllInactivos() {
     let datos = {estatus: 0};
     let parametros = new URLSearchParams(datos);
 
-    fetch("http://localhost:8080/optik/api/restoptik/getAllArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
+    fetch("../api/restoptik/getAllArmazon", {method: "POST", body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -227,16 +227,16 @@ export function getAllInactivos() {
 }
 
 export function estatusInactivo(idArmazon) {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
-        try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
+//    console.log(localStorage.getItem("currentUser"));
+//    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+//        try {
+//            let arm = JSON.parse(localStorage.getItem("currentUser"));
+//            let lToken = arm.usuario.lastToken;
                 let pr = {idArmazon: idArmazon};
-                let armazon = {datosArmazon: JSON.stringify(pr), lastToken: lToken};
+                let armazon = {datosArmazon: JSON.stringify(pr)};
                 //alert(JSON.stringify(em));
                 let parametros = new URLSearchParams(armazon);
-                fetch("http://localhost:8080/optik/api/restoptik/estatusInactivoArmazon", {method: "POST",
+                fetch("../api/restoptik/estatusInactivoArmazon", {method: "POST",
                 body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
                                 .then(response => response.json())
                                 .then(data => function (data) {
@@ -248,27 +248,27 @@ export function estatusInactivo(idArmazon) {
             setTimeout(() => {
                 getAll(1);
             }, 2000);
-        } catch (e) {
-            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-            window.location.href = "http://localhost:8080/optik/";
-        }
-    } else {
-        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-        window.location.href = "http://localhost:8080/optik/";
-    }
+//        } catch (e) {
+//            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//            window.location.href = "http://localhost:8080/optik/";
+//        }
+//    } else {
+//        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//        window.location.href = "http://localhost:8080/optik/";
+//    }
 }
 
 export function estatusActivo(idArmazon) {
-    console.log(localStorage.getItem("currentUser"));
-    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
-        try {
-            let arm = JSON.parse(localStorage.getItem("currentUser"));
-            let lToken = arm.usuario.lastToken;
+//    console.log(localStorage.getItem("currentUser"));
+//    if (localStorage.getItem("currentUser") !== "" || localStorage.getItem("currentUser") !== null) {
+//        try {
+//            let arm = JSON.parse(localStorage.getItem("currentUser"));
+//            let lToken = arm.usuario.lastToken;
             let pr = {idArmazon: idArmazon};
-                let armazon = {datosArmazon: JSON.stringify(pr), lastToken: lToken};
+                let armazon = {datosArmazon: JSON.stringify(pr)};
                 //alert(JSON.stringify(em));
                 let parametros = new URLSearchParams(armazon);
-                fetch("http://localhost:8080/optik/api/restoptik/estatusActivoArmazon", {method: "POST",
+                fetch("../api/restoptik/estatusActivoArmazon", {method: "POST",
                 body: parametros, headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}})
                                 .then(response => response.json())
                                 .then(data => function (data) {
@@ -281,14 +281,14 @@ export function estatusActivo(idArmazon) {
             setTimeout(() => {
                 getAll(0);
             }, 2000);
-        } catch (e) {
-            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-            window.location.href = "http://localhost:8080/optik/";
-        }
-    } else {
-        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
-        window.location.href = "http://localhost:8080/optik/";
-    }
+//        } catch (e) {
+//            Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//            window.location.href = "http://localhost:8080/optik/";
+//        }
+//    } else {
+//        Swal.fire({position: 'center', icon: 'error', title: 'Acceso denegado', showConfirmButton: false, timer: 1500});
+//        window.location.href = "http://localhost:8080/optik/";
+//    }
 }
 
 
@@ -408,6 +408,7 @@ fileInput.addEventListener("change", e => {
 
 export function loadFoto(i) {
     var image = new Image();
+//    let image = document.getElementById("imgFoto").value;
     image.src = armazones[i].fotografia;
 
     var w = window.open("");

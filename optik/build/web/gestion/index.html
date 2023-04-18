@@ -7,51 +7,74 @@
         <link rel="stylesheet" href="../style/bootstrap-5.1.3-dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="../style/font_awesome_5_15_3/css/all.css"/>
         <link href="../style/styleCarrusel.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="../style/sweetalert2/sweetalert2.css"/>
-        <link rel="stylesheet" href="../style/style.css" />
-        <link href="../style/styleNavbar.css" rel="stylesheet" type="text/css"/>
-        
+        <link rel="stylesheet" href="../style/sweetalert2.css"/>
+        <link href="../style/dis.css" rel="stylesheet" type="text/css"/>
+        <!--link rel="stylesheet" href="../style/style.css" />
+        <link href="../style/styleNavbar.css" rel="stylesheet" type="text/css"/-->
+
     </head>
 
     <body class="contenido">
         <header class="header">
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid navbar-brand ">
-                    <a href="#" class="logo" onclick="cargarHome()"><img class="m-2 my-1" src='../img/logo.png' style="width:30px">QUALITE</a>
-                    <a class="navbar-link me-2 link" onclick="cargarModuloEmpleado()">Empleados</a>
-                    <a class="navbar-link me-2 link" onclick="cargarModuloCliente()">Clientes</a>
-                    <a class="navbar-link me-2 link" onclick="cargarModuloTratamientos()">Tratamientos</a>
-                    <a class="navbar-link me-2 link" onclick="cargarModuloMaterial()">Materiales</a>
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle link" href="#" role="button" id="dropdownMenuProductos" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuProductos">
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="cargarModuloAccesorios();" >Accesorios</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid ">
+                    <a href="#" class="logo" onclick="cargarHome()">
+                        <img class="" src='../img/new_view.png' alt="" style="width:40px; height: 40px;">
+                    </a>
+                    <div class="ms-3">Óptica</div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="cargarModuloEmpleado()">Empleados</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="cargarModuloArmazones();">Armazones</a>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="cargarModuloCliente()">Clientes</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="cargarModuloSoluciones()">Soluciones</a>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="cargarModuloTratamientos()">Tratamientos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="cargarModuloMaterial()">Materiales</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuProductos" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuProductos">
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="cargarModuloAccesorios();">Accesorios</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="cargarModuloArmazones();">Armazones</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="cargarModuloSoluciones()">Soluciones</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle link" href="#" role="button" id="dropdownMenuVentas" data-bs-toggle="dropdown" aria-expanded="false">Ventas</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuVentas">
+                                    <li>
+                                        <a class="dropdown-item" onclick="cargarModuloVenta()">Venta Productos</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="cargarModuloVentaLente();">Venta Lentes</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="cargarModuloVentaLenteC()">Venta Lente de Contacto</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="cargarModuloRegistroV()">Registro de Ventas</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
+                        <a class="nav-link d-flex" href="../index.html" onclick="logOut()">
+                            <img class="" src='../img/salir.png' alt="" style="width:40px; height: 40px;">
+                        </a>
                     </div>
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle link" href="#" role="button" id="dropdownMenuVentas" data-bs-toggle="dropdown" aria-expanded="false">Ventas</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuProductos">
-                            <li>
-                                <a class="navbar-link me-2 link" onclick="cargarModuloVenta()">Venta Productos</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="cargarModuloVentaLente();">Venta Lentes</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="cargarModuloVentaLenteC()">Venta Lente de Contacto</a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <a class="navbar-link me-2 link" href="../index.html" onclick="logOut()">Salir</a>
                 </div>
             </nav>
         </header>
@@ -59,7 +82,7 @@
             <div id="contenedorPrincipal" class="col-12"></div>
         </div>
         <script src="../style/bootstrap-5.1.3-dist/js/bootstrap.js"></script>
-        <script src="../style/sweetalert2/sweetalert2.all.js"></script>
+        <script src="../style/sweetalert2.all.js"></script>
         <script src="../style/font_awesome_5_15_3/js/all.js"></script>
         <script src="main.js"></script>
     </body>

@@ -11,7 +11,6 @@ package org.utl.dsm.optik.model;
 public class ExamenVista {
     private int idExamenVista;
     private String clave;
-    private int estatus;
     private Empleado empleado;
     private Cliente cliente;
     private GraduacionLentes graduacion;
@@ -20,19 +19,21 @@ public class ExamenVista {
     public ExamenVista() {
     }
 
-    public ExamenVista(String clave, int estatus, Empleado empleado, Cliente cliente, GraduacionLentes graduacion, String fecha) {
+    public ExamenVista(int idExamenVista) {
+        this.idExamenVista = idExamenVista;
+    }
+
+    public ExamenVista(String clave, Empleado empleado, Cliente cliente, GraduacionLentes graduacion, String fecha) {
         this.clave = clave;
-        this.estatus = estatus;
         this.empleado = empleado;
         this.cliente = cliente;
         this.graduacion = graduacion;
         this.fecha = fecha;
     }
 
-    public ExamenVista(int idExamenVista, String clave, int estatus, Empleado empleado, Cliente cliente, GraduacionLentes graduacion, String fecha) {
+    public ExamenVista(int idExamenVista, String clave, Empleado empleado, Cliente cliente, GraduacionLentes graduacion, String fecha) {
         this.idExamenVista = idExamenVista;
         this.clave = clave;
-        this.estatus = estatus;
         this.empleado = empleado;
         this.cliente = cliente;
         this.graduacion = graduacion;
@@ -63,14 +64,6 @@ public class ExamenVista {
         this.clave = clave;
     }
 
-    public int getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(int estatus) {
-        this.estatus = estatus;
-    }
-
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -97,7 +90,7 @@ public class ExamenVista {
 
     @Override
     public String toString() {
-        return "ExamenVista{" + "idExamenVista=" + idExamenVista + ", clave=" + clave + ", estatus=" + estatus + ", empleado=" + empleado + ", cliente=" + cliente + ", graduacion=" + graduacion + ", fecha=" + fecha + '}';
+        return "ExamenVista{" + "idExamenVista=" + idExamenVista + ", clave=" + clave + ", empleado=" + empleado + ", cliente=" + cliente + ", graduacion=" + graduacion + ", fecha=" + fecha + '}';
     }
     
     

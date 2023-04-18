@@ -15,7 +15,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import org.utl.dsm.optik.controller.ControllerLenteContacto;
+import org.utl.dsm.optik.controller.ControllerTickets;
 import org.utl.dsm.optik.model.LenteContacto;
+import org.utl.dsm.optik.model.TicketLenteC;
 
 /**
  *

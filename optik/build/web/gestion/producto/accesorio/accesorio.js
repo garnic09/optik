@@ -32,7 +32,7 @@ export function insertar(){
     //Pasamos los parametros
     let parametros = new URLSearchParams(accesorio);
     //Consumimos el servicio
-    fetch("https://localhost:8080/optik/api/restoptik/insertAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
+    fetch("../api/restoptik/insertAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => function(data){
         if (data.error) {
@@ -69,7 +69,7 @@ export function actualizar(){
     //Pasamos los parametros
     let parametros = new URLSearchParams(accesorio);
     //Consumimos el servicio
-    fetch("https://localhost:8080/optik/api/restoptik/updateAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
+    fetch("../api/restoptik/updateAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => function(data){
         if (data.error) {
@@ -91,7 +91,7 @@ export function eliminar(idAccesorio){
     //Pasamos los parametros
     let parametros = new URLSearchParams(accesorio);
     //Consumimos el servicio
-    fetch("https://localhost:8080/optik/api/restoptik/deleteAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
+    fetch("../api/restoptik/deleteAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => function(data){
         if (data.error) {
@@ -111,7 +111,7 @@ export function activar(idAccesorio){
     //Pasamos los parametros
     let parametros = new URLSearchParams(accesorio);
     //Consumimos el servicio
-    fetch("https://localhost:8080/optik/api/restoptik/activateAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
+    fetch("../api/restoptik/activateAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => function(data){
         if (data.error) {
@@ -154,7 +154,7 @@ export function getAll(estatus){
     //Pasamos los parametros
     let parametros = new URLSearchParams(datos);
     //Consumimos el servicio
-    fetch("https://localhost:8080/optik/api/restoptik/getAllAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
+    fetch("../api/restoptik/getAllAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
             .then(response => response.json())
             .then(data => { 
         if (data.error) {
@@ -170,7 +170,7 @@ export function getAll(estatus){
 //export function getAllInactivos(){
 //    let datos = {estatus:0};
 //    let parametros = new URLSearchParams(datos);
-//    fetch("https://localhost:8080/optik/api/restoptik/getAllAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
+//    fetch("../api/restoptik/getAllAccesorio",{method:"POST",body:parametros,headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}})
 //            .then(response => response.json())
 //            .then(data => {
 //        if (data.error) {

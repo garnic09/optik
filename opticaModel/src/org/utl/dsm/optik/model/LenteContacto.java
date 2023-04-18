@@ -18,6 +18,10 @@ public class LenteContacto {
     public LenteContacto() {
     }
 
+    public LenteContacto(int idLenteContacto) {
+        this.idLenteContacto = idLenteContacto;
+    }
+
     public LenteContacto(Producto producto, String keratometria, String foto, String tipo) {
         this.producto = producto;
         this.keratometria = keratometria;

@@ -34,13 +34,12 @@ public class ArmazonREST extends Application {
     @Path("insertArmazon")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertArmazon(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon,
-            @FormParam("lastToken") @DefaultValue("") String lastToken) {
+    public Response insertArmazon(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon) {
         try {
-            if (!new ControllerAcceso().validarToken(lastToken)) {
-                String out = "{\"error\":'Acceso no valido'}";
-                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
-            }
+//            if (!new ControllerAcceso().validarToken(lastToken)) {
+//                String out = "{\"error\":'Acceso no valido'}";
+//                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
+//            }
 
             Gson gson = new Gson();
             Armazon armazon = new Armazon();
@@ -65,13 +64,12 @@ public class ArmazonREST extends Application {
     @Path("actualizarArmazon")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateArmazon(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon,
-            @FormParam("lastToken") @DefaultValue("") String lastToken) {
+    public Response updateArmazon(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon) {
         try {
-            if (!new ControllerAcceso().validarToken(lastToken)) {
-                String out = "{\"error\":'Acceso no valido'}";
-                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
-            }
+//            if (!new ControllerAcceso().validarToken(lastToken)) {
+//                String out = "{\"error\":'Acceso no valido'}";
+//                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
+//            }
             Gson gson = new Gson();
             Armazon armazon = new Armazon();
             armazon = gson.fromJson(datosArmazon, Armazon.class);
@@ -95,13 +93,12 @@ public class ArmazonREST extends Application {
     @Path("getAllArmazon")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllArmazon(@FormParam("estatus") @DefaultValue("1") String estatus,
-            @FormParam("lastToken") @DefaultValue("") String lastToken) {
+    public Response getAllArmazon(@FormParam("estatus") @DefaultValue("1") String estatus) {
         try {
-            if (!new ControllerAcceso().validarToken(lastToken)) {
-                String out = "{\"error\":'Acceso no valido'}";
-                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
-            }
+//            if (!new ControllerAcceso().validarToken(lastToken)) {
+//                String out = "{\"error\":'Acceso no valido'}";
+//                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
+//            }
             String out = "";
             Gson gson = new Gson();
             try {
@@ -123,13 +120,12 @@ public class ArmazonREST extends Application {
     @Path("estatusInactivoArmazon")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response estatusInactivo(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon,
-            @FormParam("lastToken") @DefaultValue("") String lastToken) {
+    public Response estatusInactivo(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon) {
         try {
-            if (!new ControllerAcceso().validarToken(lastToken)) {
-                String out = "{\"error\":'Acceso no valido'}";
-                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
-            }
+//            if (!new ControllerAcceso().validarToken(lastToken)) {
+//                String out = "{\"error\":'Acceso no valido'}";
+//                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
+//            }
             Gson gson = new Gson();
             Armazon armazon = new Armazon();
             armazon = gson.fromJson(datosArmazon, Armazon.class);
@@ -155,13 +151,12 @@ public class ArmazonREST extends Application {
     @Path("estatusActivoArmazon")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response estatusActivo(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon,
-            @FormParam("lastToken") @DefaultValue("") String lastToken) {
+    public Response estatusActivo(@FormParam("datosArmazon") @DefaultValue("") String datosArmazon) {
         try {
-            if (!new ControllerAcceso().validarToken(lastToken)) {
-                String out = "{\"error\":'Acceso no valido'}";
-                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
-            }
+//            if (!new ControllerAcceso().validarToken(lastToken)) {
+//                String out = "{\"error\":'Acceso no valido'}";
+//                return Response.status(Response.Status.BAD_REQUEST).entity(out).build();
+//            }
             Gson gson = new Gson();
             Armazon armazon = new Armazon();
             armazon = gson.fromJson(datosArmazon, Armazon.class);

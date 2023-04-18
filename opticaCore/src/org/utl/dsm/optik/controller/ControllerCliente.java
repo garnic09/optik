@@ -171,4 +171,47 @@ public class ControllerCliente {
         conn.close();
         return clientes;        
     }
+    
+    public List<Cliente> search(String filtro, String estatus) throws SQLException{
+        //Paso 1: Preparar la sentencia sql
+        String query = "SELECT * FROM optiqalumnos.vistac where nombre like '%" + filtro + "%' OR apellidoPaterno like '%" + filtro + "%' OR apellidoMaterno like '%" + filtro + "%' AND estatus = " + estatus + ";";
+        
+        //Paso 2: Conectar a la BD
+        ConexionMySQL conexion = new ConexionMySQL();
+        Connection conn = conexion.open();
+        
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        List<Cliente> clientes = new ArrayList<>();
+        ResultSet rs = pstmt.executeQuery();
+        while(rs.next()){
+            Persona p = new Persona();
+            Cliente c = new Cliente();
+            p.setIdPersona(rs.getInt("idPersona"));
+            p.setNombre(rs.getString("nombre"));
+            p.setApellidoPaterno(rs.getString("apellidoPaterno"));
+            p.setApellidoMaterno(rs.getString("apellidoMaterno"));
+            p.setGenero(rs.getString("genero"));
+            p.setFechaNacimiento(rs.getString("fechaNacimiento"));
+            p.setCalle(rs.getString("calle"));
+            p.setNumero(rs.getString("numero"));
+            p.setColonia(rs.getString("colonia"));
+            p.setCp(rs.getString("cp"));
+            p.setCiudad(rs.getString("ciudad"));
+            p.setEstado(rs.getString("estado"));
+            p.setTelcasa(rs.getString("telcasa"));
+            p.setTelmovil(rs.getString("telmovil"));
+            p.setEmail(rs.getString("email"));            
+            c.setPersona(p);
+            
+            c.setIdCliente(rs.getInt("idCliente"));
+            c.setNumeroUnico(rs.getString("numeroUnico"));
+            c.setEstatus(rs.getInt("estatus"));
+            clientes.add(c); 
+        }
+        rs.close();
+        pstmt.close();
+        conn.close();
+        
+        return clientes;
+    }
 }

@@ -159,9 +159,9 @@
         </div>
         <div class="card-footer">
             <center>
-                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.insertar()">Guardar</button>
-                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.actualizar()">Actualizar</button>
-                <button type="submit" class="btn btn-group-lg btn-primary m-3 " onclick="ma.limpiarForm()">Limpiar</button>
+                <button type="submit" class="btn btn-group-lg btn-outline-danger m-3 " onclick="ma.insertar()">Guardar</button>
+                <button type="submit" class="btn btn-group-lg btn-outline-danger m-3 " onclick="ma.actualizar()">Actualizar</button>
+                <button type="submit" class="btn btn-group-lg btn-outline-danger m-3 " onclick="ma.limpiarForm()">Limpiar</button>
             </center>
         </div>
     </div>
@@ -169,12 +169,20 @@
 <div class="container mt-5 mb-5">
     <div class="card">
         <div class="card-header">
-            <button type="button" class="btn btn-primary" onClick="ma.getAll()">Activos</button>
-            <button type="button" class="btn btn-primary" onClick="ma.getAllInactivos()">Inactivos</button>
-            <form class="d-flex m-1" role="search">
-                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
-                <button class="btn btn-outline-primary" type="button" onclick="ma.buscar()">Search</button>
-            </form>
+            <div class="row"> 
+                <div class="col-2">
+                    <button type="button" class="btn btn-secondary w-100" onClick="ma.getAll(1)">Activos</button>
+                </div>
+                <div class="col-2">  
+                    <button type="button" class="btn btn-secondary w-100" onClick="ma.getAll(0)">Inactivos</button>
+                </div>
+                <div class="col-8">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" id="txtSearch">
+                        <button class="btn btn-primary" type="button" onclick="ma.buscar()">Search</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <!-- <button type="button" onclick="getAll();">Cargar</button>-->
         <div class="card-body">

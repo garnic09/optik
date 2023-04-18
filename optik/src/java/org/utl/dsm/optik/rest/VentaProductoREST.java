@@ -14,8 +14,10 @@ import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
+import org.utl.dsm.optik.controller.ControllerTickets;
 import org.utl.dsm.optik.controller.ControllerVentaP;
 import org.utl.dsm.optik.model.DetalleVentaP;
+import org.utl.dsm.optik.model.TicketProducto;
 
 /**
  *
@@ -42,5 +44,24 @@ public class VentaProductoREST extends Application{
                 """;
         }
         return Response.status(Response.Status.OK).entity(out).build();
+    }
+    
+    @Path("getAllTicketP")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllTicketP(@FormParam("filtro") @DefaultValue("") String filtro, @FormParam("orden") @DefaultValue("desc") String orden) {
+        String out = "";
+        Gson gson = new Gson();
+        try {
+            ControllerTickets objTK = new ControllerTickets();
+            List<TicketProducto> ticketProductos;
+            ticketProductos = objTK.getAllP(filtro, orden);
+            out = gson.toJson(ticketProductos);
+        } catch (Exception ex) {
+            out = "{\"error\":" + ex.toString() + "}";
+
+        }
+        return Response.status(Response.Status.OK).entity(out).build();
+
     }
 }
