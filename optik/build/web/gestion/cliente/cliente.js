@@ -151,7 +151,7 @@ export function cargarTablaCliente(coincidencias, data) {
 
 
         contenido += "<tr>";
-        contenido += "<td>" + cliente.idCliente + "</td>";
+        contenido += "<td style='display:none;'>" + cliente.idCliente + "</td>";
         contenido += "<td>" + nc + "</td>";
         contenido += "<td>" + dc + "</td>";
         contenido += "<td>" + cliente.persona.email + "</td>";

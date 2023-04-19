@@ -1,8 +1,3 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
-
 let productos = [];
 let productosT = [];
 let indexTV = 0;
@@ -118,7 +113,7 @@ export const calcularTotal = index => {
         total += precioVenta * cantidad * (1 - preDescuento);
     });
 
-    document.querySelector('#total').innerHTML = `${total}`;
+    document.getElementById('total').value = total;
     console.log(productosT);
 };
 
@@ -187,7 +182,13 @@ export function realizarVenta(){
                 if (data.error) {
                     alert(data.error);
                 } else if(data.result){
-                    alert(data.result);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Venta exitosa',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 } else {
                     JSON.stringify(data);
                 }

@@ -159,9 +159,9 @@ export function getAll(estatus) {
 export function cargarTablaArmazon(coincidencias, data) {
     if (coincidencias) {
         data = coincidencias;
-    } else {
-        armazones = data;
-    }
+    } else 
+    armazones = data;
+    
 
     let contenido = "";
     //for(let i=0;i<empleados.length;i++){ 
@@ -180,7 +180,7 @@ export function cargarTablaArmazon(coincidencias, data) {
         contenido += "<td>" + armazon.descripcion + "</td>";
         contenido += "<td><button class='btn btn-warning btn-m m-2'  type='button' onclick='ma.loadFoto(" + index + ");'>Foto</button> </td>";
         contenido += "<td><button class='btn btn-primary btn-m m-2'  type='button' onclick='ma.cargarForm(" + index + ");'>Ver</button> </td>";
-        if (armazon.estatus === 1) {
+        if (armazon.producto.estatus === 1) {
             contenido += "<td><button class='btn btn-danger btn-m m-2'  type='button' onclick='ma.estatusInactivo(" + armazon.idArmazon + ");'>Eliminar</button></td>";
         } else {
             contenido += "<td><button class='btn btn-success btn-m m-2'  type='button' onclick='ma.estatusActivo(" + armazon.idArmazon + ");'>Activar</button> </td>";

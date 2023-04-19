@@ -179,7 +179,7 @@ function cargarHome() {
 }
 
 function cargarModuloVenta() {
-    fetch('ventas/venta/venta.html')
+    fetch('ventas/venta/ventaP.html')
             //Convertimos la respuesta en texto HTML
             .then(response => {
                 return response.text();

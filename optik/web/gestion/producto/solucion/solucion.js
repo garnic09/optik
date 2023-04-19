@@ -176,7 +176,7 @@ export function cargarTablaSoluciones(coincidencias,data){
         const {producto} = solucion;
         
         contenido += "<tr>";
-        contenido += "<td>" + solucion.idSolucion + "</td>";
+        contenido += "<td style='display:none;'>" + solucion.idSolucion + "</td>";
         contenido += "<td>" + solucion.producto.codigoBarras + "</td>";
         contenido += "<td>" + solucion.producto.nombre + "</td>";
         contenido += "<td>" + solucion.producto.marca + "</td>";

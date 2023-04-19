@@ -81,6 +81,10 @@ h2{
     color: #FE303A;
 }
 
+.accordion-button:hover{
+    background-color : #ffb3b3;
+}
+
 hr{
     border: 1px solid red;
 }
@@ -90,11 +94,13 @@ hr{
   border-color: black;
 }
 
-.accordion .accordion-collapse .accordion-button .accordion-body .accordion-flush .accordion-header .accordion-item{
-    background-color: grey;
+.accordion-button{
+    border:salmon;
+    
 }
 
 .tarjetas-scroll {
   height: 480px; 
   overflow-y: auto;
 }
+

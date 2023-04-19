@@ -241,7 +241,13 @@ export function realizarVenta() {
                 if (data.error) {
                     alert(data.error);
                 } else if (data.result) {
-                    alert(data.result);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Venta exitosa',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 } else {
                     JSON.stringify(data);
                 }

@@ -156,7 +156,7 @@ export function cargarTablaMaterial(coincidencias,data){
         const {producto} = material;
         
         contenido += "<tr>";
-        contenido += "<td>" + material.idMaterial + "</td>";
+        contenido += "<td style='display:none;'>" + material.idMaterial + "</td>";
         contenido += "<td>" + material.nombre + "</td>";
         contenido += "<td>" + material.precioCompra + "</td>";
         contenido += "<td>" + material.precioVenta + "</td>";

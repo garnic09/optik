@@ -204,7 +204,7 @@ export function cargarTablaEmpleado(coincidencias, data) {
         let nc = empleado.persona.nombre + " " + empleado.persona.apellidoPaterno + " " + empleado.persona.apellidoMaterno;
         let dc = empleado.persona.calle + " " + empleado.persona.numero + ", " + empleado.persona.colonia + ". " + empleado.persona.cp + ". " + empleado.persona.ciudad + ", " + empleado.persona.estado;
         contenido += "<tr>";
-        contenido += "<td>" + empleado.idEmpleado + "</td>";
+        contenido += "<td style='display:none;'>" + empleado.idEmpleado + "</td>";
         contenido += "<td>" + nc + "</td>";
         contenido += "<td>" + dc + "</td>";
         contenido += "<td>" + empleado.usuario.nombre + "</td>";

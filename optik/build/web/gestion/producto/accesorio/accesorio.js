@@ -197,7 +197,7 @@ export function cargarTablaAccesorio(coincidencias,data){
         const {producto} = accesorio;
         //Inyectamos codigo agregando los elementos a la tabla
         contenido += "<tr>";
-        contenido += "<td>" + accesorio.idAccesorio + "</td>";
+        contenido += "<td style='display:none;'>" + accesorio.idAccesorio + "</td>";
         contenido += "<td>" + accesorio.producto.codigoBarras + "</td>";
         contenido += "<td>" + accesorio.producto.nombre + "</td>";
         contenido += "<td>" + accesorio.producto.marca + "</td>";

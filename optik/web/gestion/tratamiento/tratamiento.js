@@ -156,7 +156,7 @@ export function cargarTablaTratamiento(coincidencias,data){
         const {producto} = tratamiento;
         
         contenido += "<tr>";
-        contenido += "<td>" + tratamiento.idTratamiento + "</td>";
+        contenido += "<td style='display:none;'>" + tratamiento.idTratamiento + "</td>";
         contenido += "<td>" + tratamiento.nombre + "</td>";
         contenido += "<td>" + tratamiento.precioCompra + "</td>";
         contenido += "<td>" + tratamiento.precioVenta + "</td>";
